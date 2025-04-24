@@ -40,7 +40,7 @@ export default function NavBar() {
                         </div>
                     </div>
                     <div className={`flex space-x-4 transition-colors font-medium duration-500 ${isAtTop === true ? 'text-white' : 'text-black'}`}>
-                        <a href="#sobre" className="hover:text-[#5AFF15]">Sobre</a>
+                        <a href="#sobre" className="hover:text-[#5AFF15]">Sobre Mim</a>
                         <a href="#contato" className="hover:text-[#5AFF15]">Habilidades</a>
                         <a href="#curriculo" className="hover:text-[#5AFF15]">Portfólio</a>
                     </div>
