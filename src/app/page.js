@@ -52,7 +52,7 @@ export default function Home() {
         </div>
 
       </div>
-        <div className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gradient-to-b bg-[#0F1020]">
+        <div id="sobre" className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gradient-to-b bg-[#0F1020]">
           <h1 className="text-4xl font-bold mb-4 text-[#447EF2]">Sobre Mim</h1>
           <p className="text-lg text-center max-w-2xl text-white">
             Olá! Meu nome é [Seu Nome] e sou um desenvolvedor Full-Stack apaixonado por criar experiências digitais incríveis. Com habilidades em design de interface do usuário e edição de vídeo, estou sempre em busca de novos desafios e oportunidades para aprender e crescer na área de tecnologia.
