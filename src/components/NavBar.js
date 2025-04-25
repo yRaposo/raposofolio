@@ -4,13 +4,13 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import Image from "next/image";
-import Titulo1 from "@/../public/imgs/Titulo1.png";
-import Titulo2 from "@/../public/imgs/Titulo2.png";
-import Titulo3 from "@/../public/imgs/Titulo3.png";
-import Titulo4 from "@/../public/imgs/Titulo4.png";
-import Titulo5 from "@/../public/imgs/Titulo5.png";
-import Titulo6 from "@/../public/imgs/Titulo6.png";
-import Titulo7 from "@/../public/imgs/Titulo7.png";
+import Titulo1 from "@/../public/imgs/Titles/Titulo1.png";
+import Titulo2 from "@/../public/imgs/Titles/Titulo2.png";
+import Titulo3 from "@/../public/imgs/Titles/Titulo3.png";
+import Titulo4 from "@/../public/imgs/Titles/Titulo4.png";
+import Titulo5 from "@/../public/imgs/Titles/Titulo5.png";
+import Titulo6 from "@/../public/imgs/Titles/Titulo6.png";
+import Titulo7 from "@/../public/imgs/Titles/Titulo7.png";
 
 
 export default function NavBar() {
@@ -41,7 +41,7 @@ export default function NavBar() {
                     </div>
                     <div className={`flex space-x-4 transition-colors font-medium duration-500 ${isAtTop === true ? 'text-white' : 'text-black'}`}>
                         <a href="#sobre" className="hover:text-[#5AFF15]">Sobre Mim</a>
-                        <a href="#contato" className="hover:text-[#5AFF15]">Habilidades</a>
+                        <a href="#habilidades" className="hover:text-[#5AFF15]">Habilidades</a>
                         <a href="#curriculo" className="hover:text-[#5AFF15]">Portfólio</a>
                     </div>
                 </div>
