@@ -73,10 +73,9 @@ export default function Home() {
               Sou movido por <strong>inovação</strong> e adoro trazer <strong>novas ideias</strong> aos projetos em que trabalho. Acredito que <strong>criatividade</strong> e <strong>colaboração</strong> são pilares essenciais para o sucesso. Estou sempre aberto a <strong>feedbacks</strong> e <strong>trocas construtivas</strong> — afinal, crescer profissionalmente é um caminho que se trilha junto!
             </p>
             <div className="flex gap-4 mt-4">
-              <StylezedBtn props={{ icon: <FaGithub size={25} />, bgColor: '#2b3137', textColor: 'white', borderColor: 'none' }} onClick={() => { }} />
-              <StylezedBtn props={{ icon: <FaLinkedin size={25} />, bgColor: '#0a66c2', textColor: 'white', borderColor: 'none' }} onClick={() => { }} />
-              <StylezedBtn props={{ icon: <FaDiscord size={25} />, bgColor: '#5865F2', textColor: 'white', borderColor: 'none' }} onClick={() => { }} />
-              <StylezedBtn props={{ icon: <FaInstagram size={25} />, bgColor: '#C13584', textColor: 'white', borderColor: 'none' }} onClick={() => { }} />
+              <StylezedBtn props={{ icon: <FaGithub size={25} />, bgColor: '#2b3137', textColor: 'white', borderColor: 'none' }} onClick={() => window.open('https://github.com/yRaposo', '_blank')} />
+              <StylezedBtn props={{ icon: <FaLinkedin size={25} />, bgColor: '#0a66c2', textColor: 'white', borderColor: 'none' }} onClick={() => window.open('https://www.linkedin.com/in/yrapos0/', '_blank')} />
+              <StylezedBtn props={{ icon: <FaInstagram size={25} />, bgColor: '#C13584', textColor: 'white', borderColor: 'none' }} onClick={() => window.open('https://www.instagram.com/yraposo_/', '_blank')} />
             </div>
           </div>
         </div>
