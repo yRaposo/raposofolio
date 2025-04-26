@@ -79,12 +79,12 @@ export default function Home() {
       <div className="flex md:hidden flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-blue-500 via-blue-500 to-white"
         style={{
           backgroundImage: `url(/imgs/Eu.png)`, backgroundSize: '200%', backgroundPosition: 'center',
-          backgroundPositionY: '400px',
+          backgroundPositionY: 'bottom',
           backgroundRepeat: "no-repeat"
         }}
       >
         <div className="flex flex-col items-center justify-center h-full w-full">
-          <div className="flex flex-col items-center justify-center min-w-screen px-20 pb-30">
+          <div className="flex flex-col items-center justify-center min-w-screen px-10">
             <Image
               src={randomTitulo}
               alt="Eu"
@@ -92,7 +92,6 @@ export default function Home() {
               onMouseOver={() => setRandomTitulo(getRandomTitulo())}
               onMouseOut={() => setRandomTitulo(getRandomTitulo())}
             />
-            <p className="text-sm">Desenvolvedor Front-End • UI Designer • Editor de Video</p>
           </div>
         </div>
       </div>
