@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
 
-    <div className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gradient-to-b from-blue-500">
+    <div className="flex flex-col items-center justify-center min-h-screen max-w-screen bg-blue-500">
 
       <NavBar />
 
@@ -43,7 +43,7 @@ export default function Home() {
             backgroundImage: `url(/imgs/Eu.png)`, backgroundSize: 'cover', backgroundPosition: 'left 150px top 150px',
             backgroundRepeat: "no-repeat"
           }}>
-          <div className="flex flex-col items-start justify-center min-w-screen pl-50">
+          <div className="flex flex-col items-start justify-center w-full pl-50">
             <Image
               src={randomTitulo}
               alt="Eu"
@@ -56,7 +56,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex lg:hidden flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-blue-500 via-blue-500 to-white"
+      <div className="hidden md:flex lg:hidden flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-blue-500 via-blue-500 to-white"
         style={{
           backgroundImage: `url(/imgs/Eu.png)`, backgroundSize: 'cover', backgroundPosition: 'center',
           backgroundRepeat: "no-repeat"
@@ -76,8 +76,29 @@ export default function Home() {
         </div>
       </div>
 
-      <div id="sobre" className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gradient-to-b bg-[#0F1020]">
-        <div className="flex flex-col items-center justify-center min-h-screen min-w-screen px-30">
+      <div className="flex md:hidden flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-blue-500 via-blue-500 to-white"
+        style={{
+          backgroundImage: `url(/imgs/Eu.png)`, backgroundSize: '200%', backgroundPosition: 'center',
+          backgroundPositionY: '400px',
+          backgroundRepeat: "no-repeat"
+        }}
+      >
+        <div className="flex flex-col items-center justify-center h-full w-full">
+          <div className="flex flex-col items-center justify-center min-w-screen px-20 pb-30">
+            <Image
+              src={randomTitulo}
+              alt="Eu"
+              width={500}
+              onMouseOver={() => setRandomTitulo(getRandomTitulo())}
+              onMouseOut={() => setRandomTitulo(getRandomTitulo())}
+            />
+            <p className="text-sm">Desenvolvedor Front-End • UI Designer • Editor de Video</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="sobre" className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b bg-[#0F1020]">
+        <div className="flex flex-col items-center justify-center min-h-screen w-full px-30">
           <div className="flex flex-col items-center justify-center w-full">
             <Image
               src={SobreMim}
@@ -105,8 +126,8 @@ export default function Home() {
         </div>
       </div>
 
-      <div id="habilidades" className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gradient-to-b bg-[#0F1020]">
-        <div className="flex flex-col items-center justify-center min-h-screen min-w-screen px-30">
+      <div id="habilidades" className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b bg-[#0F1020]">
+        <div className="flex flex-col items-center justify-center min-h-screen w-full px-30">
           <div className="flex flex-col items-center justify-center w-full">
             <Image
               src={Habilidades}
@@ -171,7 +192,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div id="portfolio" className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gradient-to-b bg-[#0F1020]">
+      <div id="portfolio" className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b bg-[#0F1020]">
         <div className="flex flex-col items-center justify-center">
           <Image
             src={Portfolio}
