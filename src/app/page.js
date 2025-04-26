@@ -13,11 +13,14 @@ import Titulo4 from "@/../public/imgs/Titles/Titulo4.png";
 import Titulo5 from "@/../public/imgs/Titles/Titulo5.png";
 import Titulo6 from "@/../public/imgs/Titles/Titulo6.png";
 import Titulo7 from "@/../public/imgs/Titles/Titulo7.png";
-import EU2 from "@/../public/imgs/eu2.jpg";
+import EU from "@/../public/imgs/Eu.png";
 import SobreMim from "@/../public/imgs/Topcs/SobreMim.png";
 import Habilidades from "@/../public/imgs/Topcs/habilidades.png";
+import Portfolio from "@/../public/imgs/Topcs/Portifolio.png";
+
 import NavBar from "@/components/NavBar";
 import StylezedBtn from "@/components/StylezedBtn";
+import Card from "@/components/Card";
 
 export default function Home() {
 
@@ -30,16 +33,37 @@ export default function Home() {
 
   return (
 
-    <div className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gradient-to-b from-blue-500 via-blue-500 to-white">
+    <div className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gradient-to-b from-blue-500">
 
       <NavBar />
-      <div className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gradient-to-b from-blue-500 via-blue-500 to-white">
-        <div className="flex flex-row items-center justify-center min-h-screen min-w-screen"
+
+      <div className="hidden lg:flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-blue-500 via-blue-500 to-white">
+        <div className="flex flex-row items-center justify-center min-h-screen w-full"
           style={{
             backgroundImage: `url(/imgs/Eu.png)`, backgroundSize: 'cover', backgroundPosition: 'left 150px top 150px',
             backgroundRepeat: "no-repeat"
           }}>
           <div className="flex flex-col items-start justify-center min-w-screen pl-50">
+            <Image
+              src={randomTitulo}
+              alt="Eu"
+              width={500}
+              onMouseOver={() => setRandomTitulo(getRandomTitulo())}
+              onMouseOut={() => setRandomTitulo(getRandomTitulo())}
+            />
+            <p className="text-xl">Desenvolvedor Front-End • UI Designer • Editor de Video</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex lg:hidden flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-blue-500 via-blue-500 to-white"
+        style={{
+          backgroundImage: `url(/imgs/Eu.png)`, backgroundSize: 'cover', backgroundPosition: 'center',
+          backgroundRepeat: "no-repeat"
+        }}
+      >
+        <div className="flex flex-col items-center justify-center h-full w-full">
+          <div className="flex flex-col items-center justify-center min-w-screen mt-90">
             <Image
               src={randomTitulo}
               alt="Eu"
@@ -94,80 +118,69 @@ export default function Home() {
             />
             <div className="grid grid-cols-2 gap-4">
 
-              <div className="flex flex-row items-center justify-center border-2 border-[#2F195F] bg-[#0F1020] rounded-lg p-4">
-                <div className="flex items-center justify-center mr-4 text-white">
-                  <CgScreen size={48} />
-                </div>
-                <div>
-                  <h1 className="text-2xl text-white font-bold">Desenvolvimento Front-end</h1>
-                  <p className="text-white">
-                    Experiência prática com React Vite, Next.js e React Native, focando em performance, responsividade e boas práticas de desenvolvimento.
-                  </p>
-                </div>
-              </div>
+              <Card
+                props={{
+                  icon: <CgScreen size={48} />,
+                  title: "Desenvolvimento Front-end",
+                  description: "Experiência prática com React Vite, Next.js e React Native, focando em performance, responsividade e boas práticas de desenvolvimento."
+                }}
+              />
 
-              <div className="flex flex-row items-center justify-center border-2 border-[#2F195F] bg-[#0F1020] rounded-lg p-4">
-                <div className="flex items-center justify-center mr-4 text-white">
-                  <FaCog size={48} />
-                </div>
-                <div>
-                  <h1 className="text-2xl text-white font-bold">Noções de Back-end</h1>
-                  <p className="text-white">
-                    Atuação com Node.js e maior familiaridade com Java Spring Boot, contribuindo para aplicações web completas e bem estruturadas.
-                  </p>
-                </div>
-              </div>
+              <Card
+                props={{
+                  icon: <FaCog size={48} />,
+                  title: "Noções de Back-end",
+                  description: "Atuação com Node.js e maior familiaridade com Java Spring Boot, contribuindo para aplicações web completas e bem estruturadas."
+                }}
+              />
 
-              <div className="flex flex-row items-center justify-center border-2 border-[#2F195F] bg-[#0F1020] rounded-lg p-4">
-                <div className="flex items-center justify-center mr-4 text-white">
-                  <FaPalette size={48} />
-                </div>
-                <div>
-                  <h1 className="text-2xl text-white font-bold">UI Design</h1>
-                  <p className="text-white">
-                    Sólido domínio de Figma e Adobe XD, criando interfaces intuitivas, funcionais e visualmente agradáveis, sempre pensando na experiência do usuário.
-                  </p>
-                </div>
-              </div>
+              <Card
+                props={{
+                  icon: <FaPalette size={48} />,
+                  title: "UI Design",
+                  description: "Sólido domínio de Figma e Adobe XD, criando interfaces intuitivas, funcionais e visualmente agradáveis, sempre pensando na experiência do usuário."
+                }}
+              />
 
-              <div className="flex flex-row items-center justify-center border-2 border-[#2F195F] bg-[#0F1020] rounded-lg p-4">
-                <div className="flex items-center justify-center mr-4 text-white">
-                  <MdMovie size={48} />
-                </div>
-                <div>
-                  <h1 className="text-2xl text-white font-bold">Edição de Vídeo</h1>
-                  <p className="text-white">
-                    Habilidade com Adobe Premiere, After Effects, Illustrator e Photoshop, trazendo criatividade e profissionalismo para projetos audiovisuais.
-                  </p>
-                </div>
-              </div>
+              <Card
+                props={{
+                  icon: <MdMovie size={48} />,
+                  title: "Edição de Vídeo",
+                  description: "Habilidade com Adobe Premiere, After Effects, Illustrator e Photoshop, trazendo criatividade e profissionalismo para projetos audiovisuais."
+                }}
+              />
 
-              <div className="flex flex-row items-center justify-center border-2 border-[#2F195F] bg-[#0F1020] rounded-lg p-4">
-                <div className="flex items-center justify-center mr-4 text-white">
-                  <FaLightbulb size={48} />
-                </div>
-                <div>
-                  <h1 className="text-2xl text-white font-bold">Perfil Inovador</h1>
-                  <p className="text-white">
-                    Motivado por tecnologia e movido por inovação, sempre buscando novas ideias e soluções criativas para os desafios dos projetos.
-                  </p>
-                </div>
-              </div>
+              <Card
+                props={{
+                  icon: <FaLightbulb size={48} />,
+                  title: "Perfil Inovador",
+                  description: "Motivado por tecnologia e movido por inovação, sempre buscando novas ideias e soluções criativas para os desafios dos projetos."
+                }}
+              />
 
-              <div className="flex flex-row items-center justify-center border-2 border-[#2F195F] bg-[#0F1020] rounded-lg p-4">
-                <div className="flex items-center justify-center mr-4 text-white">
-                  <MdGroups size={48} />
-                </div>
-                <div>
-                  <h1 className="text-2xl text-white font-bold">Espírito Colaborativo</h1>
-                  <p className="text-white">
-                    Aberto a feedbacks e trocas construtivas, com foco no crescimento coletivo e na construção de ambientes colaborativos e produtivos.
-                  </p>
-                </div>
-              </div>
+              <Card
+                props={{
+                  icon: <MdGroups size={48} />,
+                  title: "Espírito Colaborativo",
+                  description: "Aberto a feedbacks e trocas construtivas, com foco no crescimento coletivo e na construção de ambientes colaborativos e produtivos."
+                }}
+              />
 
             </div>
           </div>
+        </div>
+      </div>
+
+      <div id="portfolio" className="flex flex-col items-center justify-center min-h-screen min-w-screen bg-gradient-to-b bg-[#0F1020]">
+        <div className="flex flex-col items-center justify-center">
+          <Image
+            src={Portfolio}
+            alt="Eu"
+            width={500}
+            onMouseOver={() => setRandomTitulo(getRandomTitulo())}
+            onMouseOut={() => setRandomTitulo(getRandomTitulo())}
+            className="mb-4"
+          />
         </div>
       </div>
 
