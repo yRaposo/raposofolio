@@ -33,8 +33,8 @@ export default function NavBar() {
     return (
         <div>
             <nav className={`fixed top-0 left-0 w-full z-50 transition-colors duration-500 ${isAtTop === true ? 'bg-[#0F1020]' : 'bg-none'}`}>
-                <div className={`container mx-auto px-4 py-3 flex justify-between items-center `}>
-                    <div className="text-lg font-bold">
+                <div className={`container mx-auto px-4 py-3 flex justify-around md:justify-between items-center `}>
+                    <div className="text-lg font-bold hidden md:flex items-center space-x-4">
                         <div className={`transition-opacity duration-500 ${isAtTop === true ? 'opacity-100' : 'opacity-0'}`}>
                             <Image src={randomTitulo} alt="Random Titulo" width={250} />
                         </div>

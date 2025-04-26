@@ -97,8 +97,8 @@ export default function Home() {
       </div>
 
       <div id="sobre" className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b bg-[#0F1020]">
-        <div className="flex flex-col items-center justify-center min-h-screen w-full px-30">
-          <div className="flex flex-col items-center justify-center w-full">
+        <div className="flex flex-col items-center justify-center min-h-screen w-full px-10 md:px-30">
+          <div className="mt-20 flex flex-col items-center justify-center w-full">
             <Image
               src={SobreMim}
               alt="Eu"
@@ -107,7 +107,7 @@ export default function Home() {
               onMouseOut={() => setRandomTitulo(getRandomTitulo())}
               className="mb-4"
             />
-            <p className="text-lg text-left text-white">
+            <p className="md:text-lg text-left text-white">
               Olá! Meu nome é <strong>João Raposo</strong>, sou <strong>desenvolvedor front-end</strong> com noções de <strong>back-end</strong>, <strong>UI designer</strong> e <strong>editor de vídeo</strong>. Tenho uma verdadeira paixão por <strong>tecnologia</strong> e <strong>design</strong>, e estou sempre em busca de <strong>aprendizado constante</strong> e <strong>desenvolvimento pessoal</strong>.
               <br /><br />
               Já participei de diversos <strong>projetos web</strong>, aplicando minhas habilidades em <strong>front-end</strong> com tecnologias como <strong>React Vite</strong>, <strong>Next.js</strong> e <strong>React Native</strong>. No <strong>back-end</strong>, atuei com <strong>Node.js</strong> e, principalmente, com <strong>Java Spring Boot</strong>.
@@ -126,7 +126,7 @@ export default function Home() {
       </div>
 
       <div id="habilidades" className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b bg-[#0F1020]">
-        <div className="flex flex-col items-center justify-center min-h-screen w-full px-30">
+        <div className="flex flex-col items-center justify-center min-h-screen w-full px-10 md:px-30 mt-20">
           <div className="flex flex-col items-center justify-center w-full">
             <Image
               src={Habilidades}
@@ -136,7 +136,7 @@ export default function Home() {
               onMouseOut={() => setRandomTitulo(getRandomTitulo())}
               className="mb-4"
             />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid lg:grid-cols-2 gap-4">
 
               <Card
                 props={{
