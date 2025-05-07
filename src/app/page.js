@@ -98,7 +98,7 @@ export default function Home() {
 
       <div id="sobre" className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b bg-[#0F1020]">
         <div className="flex flex-col items-center justify-center min-h-screen w-full px-10 md:px-30">
-          <div className="mt-20 flex flex-col items-center justify-center w-full">
+          <div className="mt-20 md:mt-0 flex flex-col items-center justify-center w-full">
             <Image
               src={SobreMim}
               alt="Eu"
@@ -126,7 +126,7 @@ export default function Home() {
       </div>
 
       <div id="habilidades" className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b bg-[#0F1020]">
-        <div className="flex flex-col items-center justify-center min-h-screen w-full px-10 md:px-30 mt-20">
+        <div className="flex flex-col items-center justify-center min-h-screen w-full px-10 md:px-30 mt-20 md:mt-0">
           <div className="flex flex-col items-center justify-center w-full">
             <Image
               src={Habilidades}
@@ -192,7 +192,7 @@ export default function Home() {
       </div>
 
       <div id="portfolio" className="flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b bg-[#0F1020]">
-        <div className="flex flex-col items-center justify-center">
+        <div className="mt-20 md:mt-0 flex flex-col items-center justify-center">
           <Image
             src={Portfolio}
             alt="Eu"
