@@ -1,6 +1,6 @@
 'use client';
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaDiscord, FaGithub, FaLinkedin, FaInstagram, FaCog, FaPalette, FaLightbulb } from "react-icons/fa";
 import { CgScreen } from "react-icons/cg";
@@ -13,23 +13,40 @@ import Titulo4 from "@/../public/imgs/Titles/Titulo4.png";
 import Titulo5 from "@/../public/imgs/Titles/Titulo5.png";
 import Titulo6 from "@/../public/imgs/Titles/Titulo6.png";
 import Titulo7 from "@/../public/imgs/Titles/Titulo7.png";
-import EU from "@/../public/imgs/Eu.png";
 import SobreMim from "@/../public/imgs/Topcs/SobreMim.png";
 import Habilidades from "@/../public/imgs/Topcs/habilidades.png";
 import Portfolio from "@/../public/imgs/Topcs/Portifolio.png";
-
 import NavBar from "@/components/NavBar";
 import StylezedBtn from "@/components/StylezedBtn";
 import Card from "@/components/Card";
+import { getBlockData } from "@/service/blockService";
+import { getDatabase, queryDatabase } from "@/service/databaseService";
+import Block from "@/components/Blocks";
 
 export default function Home() {
+  const [randomTitulo, setRandomTitulo] = useState(null);
+  const [blocks, setBlocks] = useState([]);
 
   function getRandomTitulo() {
     const titulos = [Titulo1, Titulo2, Titulo3, Titulo4, Titulo5, Titulo6, Titulo7];
     return titulos[Math.floor(Math.random() * titulos.length)];
   }
 
-  const [randomTitulo, setRandomTitulo] = useState(getRandomTitulo());
+  useEffect(() => {
+    setRandomTitulo(getRandomTitulo()); // Define o título apenas no cliente
+  }, []);
+
+  useEffect(() => {
+    queryDatabase('1ecb6aeff44b800c8fafc2ca2012ff37')
+      .then((data) => {
+        setBlocks(data);
+        console.log("Blocos obtidos:", data);
+      })
+      .catch((error) => {
+        console.error("Erro ao obter os blocos:", error);
+      });
+  }, []);
+
 
   return (
 
@@ -201,6 +218,7 @@ export default function Home() {
             onMouseOut={() => setRandomTitulo(getRandomTitulo())}
             className="mb-4"
           />
+          <Block pageId='1ecb6aef-f44b-8027-b244-f15ba1ff86c2' />
         </div>
       </div>
 
