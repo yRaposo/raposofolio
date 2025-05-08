@@ -45,7 +45,7 @@ export default function Block({ pageId }) {
     }, [pageId])
 
     return (
-        <div className="flex flex-col items-center justify-center bg-[#0F1020] border-2 border-[#2F195F] rounded-lg m-4 overflow-hidden max-w-md">
+        <div className="flex flex-col items-center justify-center bg-[#0F1020] border-2 border-[#2F195F] rounded-lg m-4 overflow-hidden max-w-md" onClick={() => window.open(pageData?.properties["Link do Repositório"].url, "_blank")}>
             <div className="flex flex-col items-center justify-center w-full h-full">
                 {
                     pageData?.cover?.file?.url || pageData?.cover?.file?.url || pageData?.icon?.emoji ?

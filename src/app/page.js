@@ -125,7 +125,7 @@ export default function Home() {
               className="mb-4"
             />
             <p className="md:text-lg text-left text-white">
-              Olá! Meu nome é <strong>João Raposo</strong>, sou <strong>desenvolvedor front-end</strong> com noções de <strong>back-end</strong>, <strong>UI designer</strong> e <strong>editor de vídeo</strong>. Tenho uma verdadeira paixão por <strong>tecnologia</strong> e <strong>design</strong>, e estou sempre em busca de <strong>aprendizado constante</strong> e <strong>desenvolvimento pessoal</strong>.
+              Olá! Meu nome é <strong>João Raposo</strong>, estudante do <strong>6° Semestre</strong> de <strong>DSM</strong>, sou <strong>desenvolvedor front-end</strong> com noções de <strong>back-end</strong>, <strong>UI designer</strong> e <strong>editor de vídeo</strong>. Tenho uma verdadeira paixão por <strong>tecnologia</strong> e <strong>design</strong>, e estou sempre em busca de <strong>aprendizado constante</strong> e <strong>desenvolvimento pessoal</strong>.
               <br /><br />
               Já participei de diversos <strong>projetos web</strong>, aplicando minhas habilidades em <strong>front-end</strong> com tecnologias como <strong>React Vite</strong>, <strong>Next.js</strong> e <strong>React Native</strong>. No <strong>back-end</strong>, atuei com <strong>Node.js</strong> e, principalmente, com <strong>Java Spring Boot</strong>.
               <br /><br />
@@ -218,7 +218,13 @@ export default function Home() {
             onMouseOut={() => setRandomTitulo(getRandomTitulo())}
             className="mb-4"
           />
-          <Block pageId='1ecb6aef-f44b-8027-b244-f15ba1ff86c2' />
+          <div className="flex flex-col items-center justify-center w-full px-10 md:px-30">
+            <div className="grid lg:grid-cols-3 gap-4">
+              {blocks?.results?.map((block) => (
+                <Block key={block.id} pageId={block.id} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
