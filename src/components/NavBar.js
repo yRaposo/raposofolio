@@ -11,11 +11,14 @@ import Titulo4 from "@/../public/imgs/Titles/Titulo4.png";
 import Titulo5 from "@/../public/imgs/Titles/Titulo5.png";
 import Titulo6 from "@/../public/imgs/Titles/Titulo6.png";
 import Titulo7 from "@/../public/imgs/Titles/Titulo7.png";
+import { useRouter } from "next/navigation";
 
 
-export default function NavBar() {
+export default function NavBar({ props }) {
     const [randomTitulo, setRandomTitulo] = useState(getRandomTitulo());
     const [isAtTop, setIsAtTop] = useState(false);
+
+    const router = useRouter();
 
     function getRandomTitulo() {
         const titulos = [Titulo2, Titulo3, Titulo4, Titulo6];
@@ -23,12 +26,18 @@ export default function NavBar() {
     }
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsAtTop(window.scrollY > 300); // Verifica se está no topo
-        };
+        if (props.onHome) {
+            handleScroll();
 
-        window.addEventListener("scroll", handleScroll);
-    }, []);
+            window.addEventListener("scroll", handleScroll);
+        } else {
+            setIsAtTop(true); // Se não estiver na home, defina como true
+        }
+    }, [props.onHome]);
+
+    const handleScroll = () => {
+            setIsAtTop(window.scrollY > 300); // Verifica se está no topo
+    };
 
     return (
         <div>
@@ -40,9 +49,9 @@ export default function NavBar() {
                         </div>
                     </div>
                     <div className={`flex space-x-4 transition-colors font-medium duration-500 ${isAtTop === true ? 'text-white' : 'text-black'}`}>
-                        <a href="#sobre" className="hover:text-[#5AFF15]">Sobre Mim</a>
-                        <a href="#habilidades" className="hover:text-[#5AFF15]">Habilidades</a>
-                        <a href="#portfolio" className="hover:text-[#5AFF15]">Portfólio</a>
+                        <div onClick={() => router.push('/#sobre')} className="hover:text-[#5AFF15] cursor-pointer">Sobre Mim</div>
+                        <div onClick={() => router.push('/#habilidades')} className="hover:text-[#5AFF15] cursor-pointer">Habilidades</div>
+                        <div onClick={() => router.push('/portfolio')} className="hover:text-[#5AFF15] cursor-pointer">Portfólio</div>
                     </div>
                 </div>
             </nav>

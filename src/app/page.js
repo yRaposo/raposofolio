@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FaDiscord, FaGithub, FaLinkedin, FaInstagram, FaCog, FaPalette, FaLightbulb } from "react-icons/fa";
 import { CgScreen } from "react-icons/cg";
 import { MdGroups, MdMovie } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 import Titulo1 from "@/../public/imgs/Titles/Titulo1.png";
 import Titulo2 from "@/../public/imgs/Titles/Titulo2.png";
@@ -22,10 +23,13 @@ import Card from "@/components/Card";
 import { getBlockData } from "@/service/blockService";
 import { getDatabase, queryDatabase } from "@/service/databaseService";
 import Block from "@/components/Blocks";
+import ProjectList from "@/components/ProjectList";
 
 export default function Home() {
   const [randomTitulo, setRandomTitulo] = useState(null);
   const [blocks, setBlocks] = useState([]);
+
+  const router = useRouter();
 
   function getRandomTitulo() {
     const titulos = [Titulo1, Titulo2, Titulo3, Titulo4, Titulo5, Titulo6, Titulo7];
@@ -52,7 +56,7 @@ export default function Home() {
 
     <div className="flex flex-col items-center justify-center min-h-screen max-w-screen bg-blue-500">
 
-      <NavBar />
+      <NavBar props={{onHome: true}}/>
 
       <div className="hidden lg:flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-blue-500 via-blue-500 to-white">
         <div className="flex flex-row items-center justify-center min-h-screen w-full"
@@ -218,13 +222,14 @@ export default function Home() {
             onMouseOut={() => setRandomTitulo(getRandomTitulo())}
             className="mb-4"
           />
-          <div className="flex flex-col items-center justify-center w-full px-10 md:px-30">
-            <div className="grid lg:grid-cols-3 gap-4">
-              {blocks?.results?.map((block) => (
-                <Block key={block.id} pageId={block.id} />
-              ))}
-            </div>
+          <ProjectList props={{
+            mini: true
+          }} />
+
+          <div className="flex flex-col items-center justify-center my-10 px-40 py-5 border-2 border-[#2F195F] rounded-lg cursor-pointer hover:bg-[#2F195F] transition duration-300 ease-in-out transform hover:scale-105" onClick={() => router.push('/portfolio')}>
+            <h1 className="text-2xl font-bold text-white">Ver Mais</h1>
           </div>
+
         </div>
       </div>
 
