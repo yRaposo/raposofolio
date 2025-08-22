@@ -1,9 +1,78 @@
 @import "tailwindcss";
 
+/* Fontes personalizadas */
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Timegoing';
+  src: url('/fonts/Timegoing%20Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kode Mono';
+  src: url('/fonts/KodeMono-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Classes CSS diretas que funcionavam */
+.test-bebas { 
+  font-family: 'BebasNeue', Arial, sans-serif !important; 
+}
+.test-timegoing { 
+  font-family: 'Timegoing', Georgia, serif !important; 
+}
+.test-roboto { 
+  font-family: 'Roboto', Arial, sans-serif !important; 
+}
+.test-kode { 
+  font-family: 'Kode Mono', monospace !important; 
+}
+
+/* Classes Tailwind customizadas para garantir que funcionem */
+.font-bebas {
+  font-family: 'BebasNeue', Arial, sans-serif !important;
+}
+.font-timegoing {
+  font-family: 'Timegoing', Georgia, serif !important;
+}
+.font-roboto {
+  font-family: 'Roboto', Arial, sans-serif !important;
+}
+.font-kode {
+  font-family: 'Kode Mono', monospace !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
