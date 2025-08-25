@@ -88,13 +88,13 @@ export default function Home() {
         </div>
 
         <div className="flex flex-row justify-end w-full mt-3 gap-2">
-          <button className="flex items-center justify-around bg-none text-[#7a32cc] hover:text-[#f5f5f5] transition-colors cursor-pointer" onClick={() => window.open('https://www.linkedin.com/in/yrapos0', '_blank')}>
+          <button className="flex items-center justify-around bg-none text-[#7a32cc] hover:text-[#f5f5f5] transition-colors cursor-pointer glitch-purple" onClick={() => window.open('https://www.linkedin.com/in/yrapos0', '_blank')}>
             <FaLinkedin size={40} />
           </button>
-          <button className="flex items-center justify-around bg-none text-[#7a32cc] hover:text-[#f5f5f5] transition-colors cursor-pointer" onClick={() => window.open('https://github.com/yRaposo', '_blank')}>
+          <button className="flex items-center justify-around bg-none text-[#7a32cc] hover:text-[#f5f5f5] transition-colors cursor-pointer glitch-purple" onClick={() => window.open('https://github.com/yRaposo', '_blank')}>
             <FaGithub size={40} />
           </button>
-          <button className="flex items-center justify-around bg-none text-[#7a32cc] hover:text-[#f5f5f5] transition-colors cursor-pointer" onClick={() => window.open('https://www.instagram.com/yraposo_', '_blank')}>
+          <button className="flex items-center justify-around bg-none text-[#7a32cc] hover:text-[#f5f5f5] transition-colors cursor-pointer glitch-purple" onClick={() => window.open('https://www.instagram.com/yraposo_', '_blank')}>
             <FaInstagram size={40} />
           </button>
         </div>
