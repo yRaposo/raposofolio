@@ -103,20 +103,20 @@ export default function Home() {
         <div className="flex flex-row items-start justify-center min-h-screen w-full">
           <div className="flex flex-col items-center w-full mt-34">
             <div className="flex flex-col items-center justify-center">
-              <StrokeText text="RAPOSO" className="transform -translate-x-[166px] -translate-y-[450px]" repeat={4} vertical />
+              <StrokeText text="RAPOSO" className="transform -translate-x-[0px] -translate-y-[450px]" repeat={4} vertical />
               <Image
                 src="/imgs/Titles/Logo.svg"
                 alt="Logo"
                 width={32}
                 height={32}
-                className="w-100 mx-[-10]"
+                className="w-94"
               />
-              <StrokeText text="RAPOSO" className="transform -translate-x-[166px] -translate-y-[10px]" repeat={10} vertical />
+              <StrokeText text="RAPOSO" className="transform -translate-x-[0px] -translate-y-[10px]" repeat={10} vertical />
             </div>
           </div>
         </div>
         <div
-          className="absolute right-0 bottom-0 top-0 w-full flex items-end justify-center"
+          className="absolute right-0 bottom-0 top-0 left-0 w-full min-h-screen"
           style={{
             backgroundImage: "url(/imgs/Eu.png)",
             backgroundSize: "200% auto",
