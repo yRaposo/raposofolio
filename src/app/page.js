@@ -161,9 +161,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex flex-row items-start justify-center w-full pt-[160px] px-[20px] md:px-[64px]" id="softSkills">
-        <div className="flex w-fit h-fit items-center justify-center">
-          <div className="h-fit w-fit mr-10 border-1 border-[#f5f5f5] p-2 relative">
+      {/* Soft Skills Section */}
+      <section className="flex flex-col lg:flex-row items-start justify-center w-full pt-[160px] px-[20px] md:px-[64px]" id="softSkills">
+        <div className="flex w-full lg:w-fit h-fit items-center justify-center">
+          <div className="h-fit w-fit lg:mr-10 border-1 border-[#f5f5f5] p-2 relative mb-10 lg:mb-0">
             <div className="h-fit w-fit relative"
               style={{
                 backgroundImage: "url(/imgs/pattern.svg)",
