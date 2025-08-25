@@ -6,7 +6,6 @@ import notionToMd from "@/utils/notionToMd"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import ReactMarkdown from "react-markdown"
-import fallbackIMG from "@/../public/imgs/fallbackIMG.png";
 // Removed unused import
 import StylezedBtn2 from "./StylezedBtn2"
 
@@ -55,7 +54,7 @@ export default function Block({ pageId }) {
                     pageData?.cover?.file?.url || pageData?.cover?.file?.url || pageData?.icon?.emoji ?
                         (
                             <Image
-                                src={pageData?.cover?.file?.url || pageData?.cover?.file?.url || pageData?.icon?.emoji || fallbackIMG}
+                                src={pageData?.cover?.file?.url || pageData?.cover?.file?.url || pageData?.icon?.emoji || "/imgs/fallbackIMG.png"}
                                 alt="Cover"
                                 width={500}
                                 height={300}

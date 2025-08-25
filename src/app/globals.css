@@ -66,7 +66,7 @@ html {
 }
 
 body {
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), 'Roboto', Helvetica, sans-serif;
 }
 
 html {
@@ -76,3 +76,16 @@ html {
 body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+.stroke-text-white {
+    -webkit-text-stroke: 0.02px rgba(245, 245, 245, 0.9);
+    color: transparent;
+    filter: contrast(1.1);
+}
+
+.text-pattern-container {
+    overflow: hidden;
+    position: relative;
+}
+
+

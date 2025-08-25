@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import ProjectList from "@/components/ProjectList";
-import PortfolioIMG from "@/../public/imgs/Topcs/Portifolio.png";
 import NavBar from "@/components/NavBar";
 
 export default function Portfolio() {
@@ -11,11 +10,10 @@ export default function Portfolio() {
             <NavBar props={{ onHome: false }} />
             <div className="pt-40 md:mt-0 flex flex-col items-center justify-center">
                 <Image
-                    src={PortfolioIMG}
-                    alt="Eu"
+                    src="/imgs/Topcs/Portifolio.png"
+                    alt="Portfolio"
                     width={500}
-                    onMouseOver={() => setRandomTitulo(getRandomTitulo())}
-                    onMouseOut={() => setRandomTitulo(getRandomTitulo())}
+                    height={300}
                     className="mb-4"
                 />
                 <ProjectList props={{
