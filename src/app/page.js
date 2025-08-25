@@ -35,6 +35,8 @@ export default function Home() {
       <NavBar />
 
       {/* Hero Section */}
+
+      {/* XL SIZE */}
       <section className="hidden xl:flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-[#447EF2] via-[#447EF2] to-[#F5F5F5] overflow-hidden">
         <div className="flex flex-row items-center justify-center min-h-screen w-full">
           <div className="flex flex-col items-start justify-center w-full pl-50">
@@ -60,6 +62,65 @@ export default function Home() {
             backgroundImage: "url(/imgs/Eu.png)",
             backgroundSize: "cover",
             backgroundPosition: "50px 200px",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+      </section>
+
+      {/* LG SIZE */}
+      <section className="hidden xl:hidden lg:flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-[#447EF2] via-[#447EF2] to-[#F5F5F5] overflow-hidden">
+        <div className="flex flex-row items-center justify-center min-h-screen w-full">
+          <div className="flex flex-col items-start justify-center w-full pl-50">
+            <div className="flex flex-row">
+              <StrokeText text="RAPOSO" className="transform -translate-x-82" repeat={1} />
+              <Image
+                src="/imgs/Titles/Logo.svg"
+                alt="Logo"
+                width={32}
+                height={32}
+                className="w-100 mx-[-10]"
+              />
+              <StrokeText text="RAPOSO" className="transform -translate-x-[5px]" repeat={4} />
+            </div>
+            <p className="text-xl">
+              Desenvolvedor Full Stack • UI Designer • Editor de Video
+            </p>
+          </div>
+        </div>
+        <div
+          className="absolute right-0 bottom-0 top-0 w-full flex items-end justify-center"
+          style={{
+            backgroundImage: "url(/imgs/Eu.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "-200px 250px",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+      </section>
+
+      {/* MD SIZE */}
+      <section className="lg:hidden xl:hidden flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-[#447EF2] via-[#447EF2] to-[#F5F5F5] overflow-hidden">
+        <div className="flex flex-row items-start justify-center min-h-screen w-full">
+          <div className="flex flex-col items-center w-full mt-34">
+            <div className="flex flex-col">
+              <StrokeText text="RAPOSO" className="transform -translate-x-[-13px] -translate-y-[450px]" repeat={4} vertical />
+              <Image
+                src="/imgs/Titles/Logo.svg"
+                alt="Logo"
+                width={32}
+                height={32}
+                className="w-100 mx-[-10]"
+              />
+              <StrokeText text="RAPOSO" className="transform -translate-x-[-13px] -translate-y-[10px]" repeat={10} vertical />
+            </div>
+          </div>
+        </div>
+        <div
+          className="absolute right-0 bottom-0 top-0 w-full flex items-end justify-center"
+          style={{
+            backgroundImage: "url(/imgs/Eu.png)",
+            backgroundSize: "200% auto",
+            backgroundPosition: "bottom",
             backgroundRepeat: "no-repeat",
           }}
         />

@@ -12,24 +12,22 @@ export default function NavBar() {
 
     return (
         <div>
-            <nav className={`fixed top-0 left-0 w-full z-50 transition-colors duration-500 bg-[#1A1A1A]`}>
-                <div className={`container mx-auto px-4 py-3 flex justify-around md:justify-between items-center `}>
-                    <div className="text-lg font-bold hidden md:flex items-center space-x-4">
-                        <div className={`transition-opacity duration-500`}>
-                            <Image
-                                src="/imgs/Titles/NavLogo.svg"
-                                alt="Logo"
-                                width={32}
-                                height={32}
-                                className="w-35"
-                            />
-                        </div>
+            <nav className={`fixed top-0 left-0 w-full z-50 transition-colors duration-500 bg-[#1A1A1A] flex justify-center items-center`}>
+                <div className={`w-full mx-20px md:mx-[64px] py-3 flex flex-row justify-around md:justify-between items-center`}>
+                    <div className='hidden md:flex'>
+                        <Image
+                            src="/imgs/Titles/NavLogo.svg"
+                            alt="Logo"
+                            width={32}
+                            height={32}
+                            className="w-35"
+                        />
                     </div>
                     <div className={`flex space-x-4 transition-colors font-roboto uppercase font-medium duration-500 text-[#9D4DFF]`}>
-                        <div onClick={() => router.push('/#sobre')} className="hover:text-[#5AFF15] cursor-pointer">Sobre Mim</div>
-                        <div onClick={() => router.push('/#softSkills')} className="hover:text-[#5AFF15] cursor-pointer">Soft Skills</div>
-                        <div onClick={() => router.push('/#experiencias')} className="hover:text-[#5AFF15] cursor-pointer">Tecnologias</div>
-                        <div onClick={() => router.push('/portfolio')} className="hover:text-[#5AFF15] cursor-pointer">Portfólio</div>
+                        <div onClick={() => router.push('/#sobre')} className="hover:text-[#f5f5f5] cursor-pointer glitch-purple">Sobre Mim</div>
+                        <div onClick={() => router.push('/#softSkills')} className="hover:text-[#f5f5f5] cursor-pointer glitch-purple glitch-purple">Soft Skills</div>
+                        {/* <div onClick={() => router.push('/#experiencias')} className="hover:text-[#f5f5f5] cursor-pointer">Tecnologias</div> */}
+                        <div onClick={() => router.push('/portfolio')} className="hover:text-[#f5f5f5] cursor-pointer glitch-purple">Portfólio</div>
                     </div>
                 </div>
             </nav>
