@@ -102,8 +102,8 @@ export default function Home() {
       <section className="lg:hidden xl:hidden flex flex-col items-center justify-center min-h-screen w-full bg-gradient-to-b from-[#447EF2] via-[#447EF2] to-[#F5F5F5] overflow-hidden">
         <div className="flex flex-row items-start justify-center min-h-screen w-full">
           <div className="flex flex-col items-center w-full mt-34">
-            <div className="flex flex-col">
-              <StrokeText text="RAPOSO" className="transform -translate-x-[-13px] -translate-y-[450px]" repeat={4} vertical />
+            <div className="flex flex-col items-center justify-center">
+              <StrokeText text="RAPOSO" className="transform -translate-x-[166px] -translate-y-[450px]" repeat={4} vertical />
               <Image
                 src="/imgs/Titles/Logo.svg"
                 alt="Logo"
@@ -111,7 +111,7 @@ export default function Home() {
                 height={32}
                 className="w-100 mx-[-10]"
               />
-              <StrokeText text="RAPOSO" className="transform -translate-x-[-13px] -translate-y-[10px]" repeat={10} vertical />
+              <StrokeText text="RAPOSO" className="transform -translate-x-[166px] -translate-y-[10px]" repeat={10} vertical />
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@ export default function Home() {
           style={{
             backgroundImage: "url(/imgs/Eu.png)",
             backgroundSize: "200% auto",
-            backgroundPosition: "bottom",
+            backgroundPosition: "bottom center",
             backgroundRepeat: "no-repeat",
           }}
         />
