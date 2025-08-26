@@ -41,7 +41,7 @@ export default function Home() {
         <div className="flex flex-row items-center justify-center min-h-screen w-full">
           <div className="flex flex-col items-start justify-center w-full pl-50">
             <div className="flex flex-row">
-              <StrokeText text="RAPOSO" className="transform -translate-x-82" repeat={1} />
+              <StrokeText text="RAPOSO" className="transform -translate-x-83" repeat={1} position="right" />
               <Image
                 src="/imgs/Titles/Logo.svg"
                 alt="Logo"
@@ -49,7 +49,7 @@ export default function Home() {
                 height={32}
                 className="w-100 mx-[-10]"
               />
-              <StrokeText text="RAPOSO" className="transform -translate-x-[5px]" repeat={4} />
+              <StrokeText text="RAPOSO" className="transform -translate-x-[3px]" repeat={4} />
             </div>
             <p className="text-xl">
               Desenvolvedor Full Stack • UI Designer • Editor de Video
@@ -72,7 +72,7 @@ export default function Home() {
         <div className="flex flex-row items-center justify-center min-h-screen w-full">
           <div className="flex flex-col items-start justify-center w-full pl-50">
             <div className="flex flex-row">
-              <StrokeText text="RAPOSO" className="transform -translate-x-82" repeat={1} />
+              <StrokeText text="RAPOSO" className="transform -translate-x-83" repeat={1} position="right" />
               <Image
                 src="/imgs/Titles/Logo.svg"
                 alt="Logo"
@@ -80,7 +80,7 @@ export default function Home() {
                 height={32}
                 className="w-100 mx-[-10]"
               />
-              <StrokeText text="RAPOSO" className="transform -translate-x-[5px]" repeat={4} />
+              <StrokeText text="RAPOSO" className="transform -translate-x-[3px]" repeat={4} />
             </div>
             <p className="text-xl">
               Desenvolvedor Full Stack • UI Designer • Editor de Video
@@ -103,7 +103,7 @@ export default function Home() {
         <div className="flex flex-row items-start justify-center min-h-screen w-full">
           <div className="flex flex-col items-center w-full mt-34">
             <div className="flex flex-col items-center justify-center">
-              <StrokeText text="RAPOSO" className="transform -translate-x-[0px] -translate-y-[450px]" repeat={4} vertical />
+              <StrokeText text="RAPOSO" className="transform -translate-x-[0px] -translate-y-[510px]" repeat={4} vertical position="bottom" />
               <Image
                 src="/imgs/Titles/Logo.svg"
                 alt="Logo"
@@ -111,7 +111,7 @@ export default function Home() {
                 height={32}
                 className="w-94"
               />
-              <StrokeText text="RAPOSO" className="transform -translate-x-[0px] -translate-y-[10px]" repeat={10} vertical />
+              <StrokeText text="RAPOSO" className="transform -translate-x-[0px] -translate-y-[-33px]" repeat={10} vertical position="top" />
             </div>
           </div>
         </div>
@@ -164,7 +164,7 @@ export default function Home() {
       {/* Soft Skills Section */}
       <section className="flex flex-col-reverse lg:flex-row items-start justify-center w-full pt-[160px] px-[20px] md:px-[64px]" id="softSkills">
         <div className="flex w-full lg:w-fit h-fit items-center justify-center">
-          <div className="h-fit w-fit lg:mr-10 border-1 border-[#f5f5f5] p-2 relative mt-10 lg:mt-0">
+          <div className="h-fit w-fit lg:mr-10 border-1 border-[#f5f5f5] p-2 relative mt-10 lg:mb-0">
             <div className="h-fit w-fit relative"
               style={{
                 backgroundImage: "url(/imgs/pattern.svg)",
