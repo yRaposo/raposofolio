@@ -111,7 +111,7 @@ export default function Home() {
                 height={32}
                 className="w-94"
               />
-              <StrokeText text="RAPOSO" className="transform -translate-x-[0px] -translate-y-[-33px]" repeat={10} vertical position="top" />
+              <StrokeText text="RAPOSO" className="transform -translate-x-[0px] -translate-y-[-33px]" repeat={20} vertical position="top" />
             </div>
           </div>
         </div>
