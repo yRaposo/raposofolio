@@ -20,8 +20,8 @@ export default function ProjectList({ props }) {
 
     if (props?.mini) {
         return (
-            <div className="flex flex-col items-center justify-center w-full px-10 md:px-30">
-                <div className="grid lg:grid-cols-3 gap-4">
+            <div className="flex flex-col items-center justify-center w-full h-full px-2">
+                <div className="grid md:grid-cols-3 w-full h-full gap-4">
                     {blocks?.results?.slice(0, 3).map((block) => (
                         <Block key={block.id} pageId={block.id} />
                     ))}
@@ -32,7 +32,7 @@ export default function ProjectList({ props }) {
 
     return (
         <div className="flex flex-col items-center justify-center w-full px-10 md:px-30">
-            <div className="grid lg:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-3 gap-4">
                 {blocks?.results?.map((block) => (
                     <Block key={block.id} pageId={block.id} />
                 ))}

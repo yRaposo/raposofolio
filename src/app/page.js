@@ -129,8 +129,8 @@ export default function Home() {
       {/* About Section */}
       <section className="flex flex-col items-start justify-center w-full pt-[160px] px-[20px] md:px-[64px]" id="sobre">
         <div className="flex flex-row items-start justify-center w-full">
-          <div className="flex items-start justify-center h-full w-15">
-            <h2 className="text-start text-6xl font-bebas text-[#9D4DFF] transform -rotate-270 -translate-x-[-120px] whitespace-nowrap origin-top-left">Sobre Mim</h2>
+          <div className="items-start justify-center h-full w-15">
+            <h2 className="text-start text-6xl font-bebas text-[#9D4DFF] transform -rotate-270 -translate-x-[-50px] whitespace-nowrap origin-top-left">Sobre Mim</h2>
           </div>
           <div className="flex flex-col text-start text-[#F5F5F5] font-roboto text-md space-y-4">
             <p>
@@ -183,8 +183,8 @@ export default function Home() {
           </div>
         </div>
         <div className="flex flex-row items-start justify-center w-full">
-          <div className="flex items-start justify-center h-full w-15">
-            <h2 className="text-start text-6xl font-bebas text-[#9D4DFF] transform -rotate-270 -translate-x-[-130px] whitespace-nowrap origin-top-left">Soft skills</h2>
+          <div className="items-start justify-center h-full w-15">
+            <h2 className="text-start text-6xl font-bebas text-[#9D4DFF] transform -rotate-270 -translate-x-[-50px] whitespace-nowrap origin-top-left">Soft skills</h2>
           </div>
           <div className="w-full flex flex-col gap-5">
             <HabilitCard title="Comunicação" text="Capacidade de transmitir ideias de forma clara, adaptando a linguagem ao público e garantindo entendimento mútuo." icon={<MdOutlineCampaign size={60} />} />
@@ -199,10 +199,18 @@ export default function Home() {
 
 
       {/* Projects Section */}
-      <section className="flex flex-col items-center justify-center w-full pt-[160px]">
-        <h2 className="text-3xl font-bold text-white">Meus Projetos</h2>
-        <ProjectList projects={blocks} />
+      <section className="flex flex-col items-start justify-center w-full pt-[160px] px-[20px] md:px-[64px] mb-20" id="portfolio">
+        <div className="flex flex-row items-start justify-center w-full">
+          <div className="items-start justify-center h-full w-15">
+            <h2 className="text-start text-6xl font-bebas text-[#9D4DFF] transform -rotate-270 -translate-x-[-50px] whitespace-nowrap origin-top-left">Portfólio</h2>
+          </div>
+          <div className="flex flex-col items-center justify-center w-full">
+            <ProjectList props={{ mini: true }} />
+          </div>
+        </div>
       </section>
     </div>
   );
 }
+
+{/* <ProjectList projects={blocks} /> */ }

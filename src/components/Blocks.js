@@ -1,104 +1,170 @@
 'use client'
 
-// Removed unused import
 import { getPageData } from "@/service/pageService"
 import notionToMd from "@/utils/notionToMd"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import ReactMarkdown from "react-markdown"
-// Removed unused import
 import StylezedBtn2 from "./StylezedBtn2"
 
+/**
+ * Componente que renderiza um bloco de projeto com dados do Notion
+ * @param {string} pageId - ID da página do Notion a ser carregada
+ */
 export default function Block({ pageId }) {
-
+    // Estados para gerenciar dados da página, blocos de conteúdo, carregamento e erros
     const [pageData, setPageData] = useState([])
     const [blockData, setBlockData] = useState([])
     const [loading, setLoading] = useState(false)
-    // Removed unused state variable
-    // Removed unused state variable
+    const [error, setError] = useState(null)
 
+    // Efeito para carregar os dados básicos da página
     useEffect(() => {
-        setLoading(true)
-        getPageData(pageId)
-            .then((data) => {
+        if (!pageId) return
+
+        const fetchPageData = async () => {
+            setLoading(true)
+            setError(null)
+
+            try {
+                const data = await getPageData(pageId)
                 console.log('Page data:', data)
                 setPageData(data)
-            })
-            .catch((error) => {
+            } catch (error) {
+                console.error('Erro ao carregar dados da página:', error)
                 setError(error)
-            })
-            .finally(() => {
+            } finally {
                 setLoading(false)
-            })
+            }
+        }
+
+        fetchPageData()
     }, [pageId])
 
+    // Efeito para converter e carregar o conteúdo markdown da página
     useEffect(() => {
-        setLoading(true)
-        notionToMd(pageId)
-            .then((data) => {
+        if (!pageId) return
+
+        const fetchBlockData = async () => {
+            setLoading(true)
+            setError(null)
+
+            try {
+                const data = await notionToMd(pageId)
                 console.log('Block data:', data)
                 setBlockData(data)
-            })
-            .catch((error) => {
+            } catch (error) {
+                console.error('Erro ao carregar dados dos blocos:', error)
                 setError(error)
-            })
-            .finally(() => {
+            } finally {
                 setLoading(false)
-            })
+            }
+        }
+
+        fetchBlockData()
     }, [pageId])
 
+    // Função para abrir o repositório em nova aba
+    const handleRepositoryClick = () => {
+        const repositoryUrl = pageData?.properties?.["Link do Repositório"]?.url
+        if (repositoryUrl) {
+            window.open(repositoryUrl, "_blank")
+        }
+    }
+
+    // Função para renderizar a imagem de capa ou placeholder
+    const renderCoverImage = () => {
+        const coverUrl = pageData?.cover?.file?.url
+        const iconEmoji = pageData?.icon?.emoji
+
+        if (coverUrl || iconEmoji) {
+            return (
+                <Image
+                    src={coverUrl || iconEmoji || "/imgs/fallbackIMG.png"}
+                    alt="Capa do projeto"
+                    width={500}
+                    height={300}
+                    className="w-full h-48 object-cover"
+                />
+            )
+        }
+
+        // Placeholder de carregamento
+        return <div className="flex w-full h-48 bg-[#51525E] animate-pulse" />
+    }
+
+    // Função para renderizar o título do projeto
+    const renderProjectTitle = () => {
+        const title = pageData?.properties?.Nome?.title?.[0]?.plain_text
+
+        if (title) {
+            return <h1 className="text-start text-6xl font-bebas text-[#447EF2] transform -rotate-270 translate-x-12 whitespace-nowrap writing-mode-vertical-rl origin-top-left">{title}</h1>
+        }
+
+        // Placeholder de carregamento
+        return <div className="flex w-9/10 h-70 bg-[#51525E] animate-pulse" />
+    }
+
+    // Função para renderizar o conteúdo markdown
+    const renderMarkdownContent = () => {
+        if (!blockData?.parent) {
+            return (
+                <div className="space-y-1">
+                    <div className="flex w-full h-7 bg-[#51525E] animate-pulse" />
+                    <div className="flex w-full h-7 bg-[#51525E] animate-pulse" />
+                    <div className="flex w-4/5 h-7 bg-[#51525E] animate-pulse" />
+                    <div className="flex w-1/2 h-7 bg-[#51525E] animate-pulse" />
+                </div>
+            )
+        }
+
+        // Limita o texto a 200 caracteres
+        const truncatedContent = blockData.parent.length > 200
+            ? `${blockData.parent.substring(0, 200)}...`
+            : blockData.parent
+
+        return (
+            <div className="markdown-container text-white text-wrap truncate">
+                <ReactMarkdown>{truncatedContent}</ReactMarkdown>
+            </div>
+        )
+    }
+
+    // Função para renderizar o botão do repositório
+    const renderRepositoryButton = () => {
+        const repositoryUrl = pageData?.properties?.["Link do Repositório"]?.url
+
+        if (repositoryUrl) {
+            return (
+                <StylezedBtn2
+                    props={{ text: "Ver Repositório" }}
+                    onClick={handleRepositoryClick}
+                />
+            )
+        }
+
+        // Placeholder de carregamento
+        return <div className="flex w-full h-10 bg-[#51525E] rounded-sm animate-pulse" />
+    }
+
+    // Renderização do componente principal
     return (
-        <div className="flex flex-col items-center justify-center bg-[#0F1020] border-2 border-[#2F195F] rounded-lg m-4 overflow-hidden max-w-md" onClick={() => pageData?.properties?.["Link do Repositório"]?.url && window.open(pageData.properties["Link do Repositório"].url, "_blank")}>
-            <div className="flex flex-col items-center justify-center w-full h-full">
-                {
-                    pageData?.cover?.file?.url || pageData?.cover?.file?.url || pageData?.icon?.emoji ?
-                        (
-                            <Image
-                                src={pageData?.cover?.file?.url || pageData?.cover?.file?.url || pageData?.icon?.emoji || "/imgs/fallbackIMG.png"}
-                                alt="Cover"
-                                width={500}
-                                height={300}
-                                className="w-full h-48 object-cover"
-                            />
-                        ) : (
-                            <div className="flex w-full h-48 bg-[#51525E] rounded-lg animate-pulse"></div>
-                        )
-                }
-                <div className="flex flex-col items-start justify-center w-full h-full rounded-sm shadow-lg p-4">
-                    {
-                        pageData?.properties?.Nome?.title[0]?.plain_text ? (
-                            <h1 className="text-2xl font-bold text-white">{pageData?.properties?.Nome?.title[0]?.plain_text}</h1>
-                        ) : (
-                            <div className="flex w-full h-10 bg-[#51525E] rounded-sm animate-pulse"></div>
-                        )
-                    }
-                    {
-                        blockData ? (
-                            <div className="flex flex-col items-start justify-center w-full h-full">
-                                <div className="markdown-container text-white text-wrap truncate">
-                                    <ReactMarkdown>
-                                        {blockData?.parent?.length > 200 ? `${blockData.parent.substring(0, 200)}...` : blockData.parent}
-                                    </ReactMarkdown>
-                                </div>
-                                <div className="flex flex-col items-center justify-between w-full mt-1">
-                                    {
-                                        pageData?.properties?.["Link do Repositório"]?.url ? (
-                                            <StylezedBtn2
-                                                props={{
-                                                    text: "Ver Repositório",
-                                                }}
-                                                onClick={() => window.open(pageData?.properties["Link do Repositório"]?.url, "_blank")}
-                                            />
-                                        ) : (
-                                            <div className="flex w-full h-10 bg-[#51525E] rounded-sm animate-pulse"></div>
-                                        )
-                                    }
-                                </div>
-                            </div>
-                        ) : (
-                            <div className="flex w-full h-10 bg-[#51525E] rounded-sm animate-pulse"></div>
-                        )
-                    }
+        <div
+            className="flex flex-col items-start justify-center bg-[#1A1A1A] border-1 border-[#F5F5F5] p-1 overflow-hidden cursor-pointer w-full h-[600px] transform-flat hover:scale-105 hover:translate-z-3 transition duration-300 hover:shadow-xl hover:shadow-[#F5F5F5] bg-gradient-to-b from-[#1A1A1A] via-[#1A1A1A] via-80% hover:to-[#F5F5F5]"
+            onClick={handleRepositoryClick}
+        >
+            <div className="flex flex-col items-center justify-start w-full h-full">
+                {/* Seção da imagem de capa */}
+                {renderCoverImage()}
+
+                {/* Seção do conteúdo principal */}
+                <div className="flex flex-row items-start justify-center w-full pt-2">
+                    <div className="items-start justify-center h-full w-15">
+                        {renderProjectTitle()}
+                    </div>
+                    <div className="flex flex-col text-start font-roboto text-md space-y-4 w-full h-full">
+                        {renderMarkdownContent()}
+                    </div>
                 </div>
             </div>
         </div>
