@@ -12,11 +12,21 @@ import { getDatabase, queryDatabase } from "@/service/databaseService";
 import ProjectList from "@/components/ProjectList";
 import StrokeText from "@/components/StrokeText";
 import HabilitCard from "@/components/HabilitCard";
+import Modal from "@/components/Modal";
+import ProjectModal from "@/components/ProjectModal";
 
 export default function Home() {
   const [blocks, setBlocks] = useState([]);
+  const [pageData, setPageData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const router = useRouter();
+
+  // Função para abrir o modal com os dados do projeto
+  const handleProjectClick = (projectData) => {
+    setPageData(projectData);
+    setShowModal(true);
+  };
 
   useEffect(() => {
     queryDatabase('1ecb6aeff44b800c8fafc2ca2012ff37')
@@ -205,11 +215,26 @@ export default function Home() {
             <h2 className="text-start text-6xl font-bebas text-[#9D4DFF] transform -rotate-270 -translate-x-[-50px] whitespace-nowrap origin-top-left">Portfólio</h2>
           </div>
           <div className="flex flex-col items-center justify-center w-full">
-            <ProjectList props={{ mini: true }} />
+            <ProjectList props={{ mini: true }} onProjectClick={handleProjectClick} />
+            
+            {/* Botão Ver Todos os Projetos */}
+            <div className="flex justify-end w-full mt-8 mr-4">
+              <button
+                onClick={() => router.push('/portfolio')}
+                className="flex items-center justify-center text-white font-bebas text-xl px-8 py-3 transition-all duration-300 hover:scale-105 glitch-blue border border-[#F5F5F5] hover:bg-[#F5F5F5] hover:text-black"
+              >
+                VER TODOS OS PROJETOS
+              </button>
+            </div>
           </div>
         </div>
       </section>
+
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+        <ProjectModal projectData={pageData} />
+      </Modal>
     </div>
+
   );
 }
 

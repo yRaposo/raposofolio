@@ -1,0 +1,236 @@
+'use client'
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
+import ToolIcon from './toolIcon'
+import ReactMarkdown from "react-markdown"
+import rehypeRaw from 'rehype-raw'
+import rehypeSanitize from 'rehype-sanitize'
+import notionToMd from "@/utils/notionToMd"
+
+export default function ProjectModal({ projectData }) {
+    const [projectInfo, setProjectInfo] = useState({
+        title: '',
+        description: '',
+        coverUrl: '',
+        repositoryUrl: '',
+        liveUrl: '',
+        tools: [],
+        blockContent: ''
+    })
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        if (projectData) {
+            const title = projectData?.properties?.Nome?.title?.[0]?.plain_text || '';
+            const description = projectData?.properties?.Descrição?.rich_text?.[0]?.plain_text || '';
+            const coverUrl = projectData?.cover?.file?.url || '';
+            const repositoryUrl = projectData?.properties?.["Link do Repositório"]?.url || '';
+            const liveUrl = projectData?.properties?.["Link Live"]?.url || '';
+            const tools = projectData?.properties?.["Ferramentas"]?.multi_select || [];
+
+            setProjectInfo({
+                title,
+                description,
+                coverUrl: coverUrl.trim(), // Remove espaços em branco
+                repositoryUrl: repositoryUrl.trim(),
+                liveUrl: liveUrl.trim(),
+                tools,
+                blockContent: ''
+            })
+            
+            // Buscar o conteúdo dos blocos do Notion
+            if (projectData.id) {
+                fetchBlockContent(projectData.id)
+            }
+        }
+    }, [projectData])
+
+    const fetchBlockContent = async (pageId) => {
+        setLoading(true)
+        try {
+            const markdownContent = await notionToMd(pageId)
+            console.log('Conteúdo markdown recebido:', markdownContent) // Debug
+            console.log('Tipo do conteúdo:', typeof markdownContent) // Debug tipo
+            
+            // Garantir que é uma string
+            let contentString = ''
+            if (typeof markdownContent === 'string') {
+                contentString = markdownContent
+            } else if (markdownContent && typeof markdownContent === 'object') {
+                // Se for um objeto, tentar extrair a string
+                contentString = markdownContent.parent || markdownContent.content || JSON.stringify(markdownContent) || ''
+            }
+            
+            setProjectInfo(prev => ({
+                ...prev,
+                blockContent: contentString
+            }))
+        } catch (error) {
+            console.error('Erro ao buscar conteúdo dos blocos:', error)
+            setProjectInfo(prev => ({
+                ...prev,
+                blockContent: ''
+            }))
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    if (!projectData) return null
+
+    const { title, description, coverUrl, repositoryUrl, liveUrl, tools, blockContent } = projectInfo
+
+    return (
+        <div className="flex flex-col space-y-6">
+            {/* Header */}
+            <div className="flex flex-col space-y-4">
+                {/* Cover Image */}
+                {coverUrl && coverUrl.trim() !== '' && (
+                    <div className="relative w-full h-64 overflow-hidden">
+                        <Image
+                            src={coverUrl}
+                            alt={title || 'Capa do projeto'}
+                            fill
+                            className="object-cover"
+                        />
+                    </div>
+                )}
+            </div>
+
+            <div className="flex flex-row">
+                <div className="items-start justify-center h-full w-15">
+                    <h1 className="text-start text-6xl font-bebas text-[#9D4DFF] transform -rotate-270 translate-x-12 whitespace-nowrap writing-mode-vertical-rl origin-top-left">{title}</h1>
+                </div>
+
+                <div className="flex flex-col space-y-4">
+                    {/* Conteúdo dos Blocos do Notion */}
+                    <div className="text-[#F5F5F5] font-roboto text-lg leading-relaxed">
+                        {loading ? (
+                            <div className="space-y-2">
+                                <div className="flex w-full h-4 bg-[#51525E] animate-pulse rounded" />
+                                <div className="flex w-3/4 h-4 bg-[#51525E] animate-pulse rounded" />
+                                <div className="flex w-1/2 h-4 bg-[#51525E] animate-pulse rounded" />
+                            </div>
+                        ) : blockContent && typeof blockContent === 'string' && blockContent.trim() ? (
+                            <div className="markdown-content">
+                                <ReactMarkdown 
+                                    components={{
+                                        h1: ({children}) => <h1 className="text-2xl font-bebas text-[#447EF2] mb-4">{children}</h1>,
+                                        h2: ({children}) => <h2 className="text-xl font-bebas text-[#9D4DFF] mb-3">{children}</h2>,
+                                        h3: ({children}) => <h3 className="text-lg font-bebas text-[#F5F5F5] mb-2">{children}</h3>,
+                                        p: ({children}) => <p className="mb-3 text-[#F5F5F5]">{children}</p>,
+                                        ul: ({children}) => <ul className="list-disc list-inside mb-3 text-[#F5F5F5] space-y-1">{children}</ul>,
+                                        ol: ({children}) => <ol className="list-decimal list-inside mb-3 text-[#F5F5F5] space-y-1">{children}</ol>,
+                                        code: ({children}) => <code className="bg-[#2A2A2A] text-[#77ff00] px-2 py-1 rounded text-sm">{children}</code>,
+                                        pre: ({children}) => <pre className="bg-[#2A2A2A] p-4 rounded overflow-x-auto mb-3">{children}</pre>,
+                                        blockquote: ({children}) => <blockquote className="border-l-4 border-[#447EF2] pl-4 italic text-[#B0B0B0] mb-3">{children}</blockquote>,
+                                        strong: ({children}) => <strong className="text-[#447EF2] font-bold">{children}</strong>,
+                                        em: ({children}) => <em className="text-[#9D4DFF] italic">{children}</em>,
+                                        a: ({href, children}) => {
+                                            // Validar href antes de renderizar
+                                            if (!href || href.trim() === '') {
+                                                return <span className="text-[#F5F5F5]">{children}</span>;
+                                            }
+                                            return (
+                                                <a 
+                                                    href={href} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="text-[#447EF2] hover:text-[#9D4DFF] underline transition-colors"
+                                                >
+                                                    {children}
+                                                </a>
+                                            );
+                                        },
+                                        img: ({src, alt}) => {
+                                            // Validar se src existe e não está vazio
+                                            if (!src || src.trim() === '') {
+                                                return null; // Não renderiza nada se src for inválido
+                                            }
+                                            
+                                            return (
+                                                <div className="my-4">
+                                                    <Image
+                                                        src={src}
+                                                        alt={alt || 'Imagem do projeto'}
+                                                        width={800}
+                                                        height={400}
+                                                        className="rounded-lg object-cover w-full h-auto"
+                                                    />
+                                                </div>
+                                            );
+                                        },
+                                        // Suporte para HTML customizado (vídeos, embeds)
+                                        div: ({className, children, ...props}) => {
+                                            if (className === 'video-embed') {
+                                                return (
+                                                    <div className="my-6 rounded-lg overflow-hidden bg-black" {...props}>
+                                                        {children}
+                                                    </div>
+                                                );
+                                            }
+                                            if (className === 'embed-container') {
+                                                return (
+                                                    <div className="my-6 rounded-lg overflow-hidden border border-[#444]" {...props}>
+                                                        {children}
+                                                    </div>
+                                                );
+                                            }
+                                            return <div className={className} {...props}>{children}</div>;
+                                        }
+                                    }}
+                                    // Permitir HTML para embeds de vídeo
+                                    rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                                    remarkPlugins={[]}
+                                >
+                                    {blockContent}
+                                </ReactMarkdown>
+                            </div>
+                        ) : (
+                            <p className="text-[#B0B0B0] italic">Nenhum conteúdo adicional disponível.</p>
+                        )}
+                    </div>
+
+                    {/* Tools */}
+                    {tools && tools.length > 0 && (
+                        <div className="flex flex-col space-y-3">
+                            <h3 className="text-xl font-bebas text-[#447EF2]">Tecnologias Utilizadas</h3>
+                            <div className="flex flex-wrap gap-3">
+                                {tools.map((tool, index) => (
+                                    <div key={index} className="flex items-center space-x-2 bg-[#2A2A2A] px-3 py-2">
+                                        <ToolIcon toolName={tool.name} />
+                                        <span className="text-[#F5F5F5] text-sm">{tool.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Links */}
+                    <div className="flex space-x-4 pt-4">
+                        {repositoryUrl && (
+                            <button
+                                onClick={() => window.open(repositoryUrl, '_blank')}
+                                className="flex items-center space-x-2 bg-[#447EF2] hover:bg-[#3366CC] text-white px-4 py-2 transition-colors glitch-blue"
+                            >
+                                <FaGithub size={20} />
+                                <span>Repositório</span>
+                            </button>
+                        )}
+
+                        {liveUrl && (
+                            <button
+                                onClick={() => window.open(liveUrl, '_blank')}
+                                className="flex items-center space-x-2 bg-[#9D4DFF] hover:bg-[#7a32cc] text-white px-4 py-2 transition-colors glitch-purple"
+                            >
+                                <FaExternalLinkAlt size={16} />
+                                <span>Ver Projeto</span>
+                            </button>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}

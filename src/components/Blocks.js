@@ -3,20 +3,22 @@
 import { getPageData } from "@/service/pageService"
 import notionToMd from "@/utils/notionToMd"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { use, useEffect, useState } from "react"
 import ReactMarkdown from "react-markdown"
 import StylezedBtn2 from "./StylezedBtn2"
+import ToolIcon from "./toolIcon"
 
 /**
  * Componente que renderiza um bloco de projeto com dados do Notion
  * @param {string} pageId - ID da página do Notion a ser carregada
  */
-export default function Block({ pageId }) {
+export default function Block({ pageId, onClick }) {
     // Estados para gerenciar dados da página, blocos de conteúdo, carregamento e erros
     const [pageData, setPageData] = useState([])
     const [blockData, setBlockData] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
+    const [isHovered, setIsHovered] = useState(false)
 
     // Efeito para carregar os dados básicos da página
     useEffect(() => {
@@ -64,11 +66,10 @@ export default function Block({ pageId }) {
         fetchBlockData()
     }, [pageId])
 
-    // Função para abrir o repositório em nova aba
+    // Função para abrir o modal
     const handleRepositoryClick = () => {
-        const repositoryUrl = pageData?.properties?.["Link do Repositório"]?.url
-        if (repositoryUrl) {
-            window.open(repositoryUrl, "_blank")
+        if (onClick) {
+            onClick(pageData) // Passa os dados do projeto para o componente pai
         }
     }
 
@@ -107,7 +108,8 @@ export default function Block({ pageId }) {
 
     // Função para renderizar o conteúdo markdown
     const renderMarkdownContent = () => {
-        if (!blockData?.parent) {
+        const description = pageData?.properties?.Descrição?.rich_text?.[0]?.plain_text
+        if (description === undefined) {
             return (
                 <div className="space-y-1">
                     <div className="flex w-full h-7 bg-[#51525E] animate-pulse" />
@@ -119,53 +121,88 @@ export default function Block({ pageId }) {
         }
 
         // Limita o texto a 200 caracteres
-        const truncatedContent = blockData.parent.length > 200
-            ? `${blockData.parent.substring(0, 200)}...`
-            : blockData.parent
+        // const truncatedContent = blockData.parent.length > 200
+        //     ? `${blockData.parent.substring(0, 200)}...`
+        //     : blockData.parent
 
+        // return (
+        //     <div className="markdown-container text-white text-wrap truncate">
+        //         <ReactMarkdown>{truncatedContent}</ReactMarkdown>
+        //     </div>
+        // )
         return (
-            <div className="markdown-container text-white text-wrap truncate">
-                <ReactMarkdown>{truncatedContent}</ReactMarkdown>
+            <div className="markdown-container text-white text-wrap">
+                {description}
             </div>
         )
     }
 
-    // Função para renderizar o botão do repositório
-    const renderRepositoryButton = () => {
-        const repositoryUrl = pageData?.properties?.["Link do Repositório"]?.url
-
-        if (repositoryUrl) {
+    const renderToolIcon = () => {
+        const toolName = pageData?.properties?.["Ferramentas"]?.multi_select
+        if (toolName) {
             return (
-                <StylezedBtn2
-                    props={{ text: "Ver Repositório" }}
-                    onClick={handleRepositoryClick}
-                />
+                <div className="space-x-1 flex flex-row">
+                    {toolName.map((tool, index) => (
+                        <ToolIcon key={index} toolName={tool.name} />
+                    ))}
+                </div>
+            )
+        } else {
+            return (
+                <div className="space-x-1 flex flex-row">
+                    <div className="flex h-7 w-7 bg-[#51525E] animate-pulse" />
+                    <div className="flex h-7 w-7 bg-[#51525E] animate-pulse" />
+                    <div className="flex h-7 w-7 bg-[#51525E] animate-pulse" />
+                    <div className="flex h-7 w-7 bg-[#51525E] animate-pulse" />
+                </div>
             )
         }
+    }
 
-        // Placeholder de carregamento
-        return <div className="flex w-full h-10 bg-[#51525E] rounded-sm animate-pulse" />
+    const renderHoverText = () => {
+        if (isHovered) {
+            return (
+                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-[#77ff00] font-timegoing cursor-pointer select-none glitch-purple-initial w-100 z-50">
+                    <Image src="/imgs/verProjeto.svg"
+                        alt="Ver Projeto"
+                        width={900}
+                        height={900}
+                        objectFit="contain"
+                        className="w-full h-full object-contain"
+                    />
+                </div>
+            )
+        }
     }
 
     // Renderização do componente principal
     return (
         <div
-            className="flex flex-col items-start justify-center bg-[#1A1A1A] border-1 border-[#F5F5F5] p-1 overflow-hidden cursor-pointer w-full h-[600px] transform-flat hover:scale-105 hover:translate-z-3 transition duration-300 hover:shadow-xl hover:shadow-[#F5F5F5] bg-gradient-to-b from-[#1A1A1A] via-[#1A1A1A] via-80% hover:to-[#F5F5F5]"
+            className="flex flex-col items-start justify-center bg-[#1A1A1A] border-1 border-[#F5F5F5] p-1  cursor-pointer w-full h-[600px] transform-flat hover:scale-105 hover:translate-z-3 transition duration-300 hover:shadow-xl hover:shadow-[#F5F5F5] bg-gradient-to-b from-[#1A1A1A] via-[#1A1A1A] via-80% hover:to-[#F5F5F5]"
             onClick={handleRepositoryClick}
+            onMouseOver={() => setIsHovered(true)}
+            onMouseOut={() => setIsHovered(false)}
         >
             <div className="flex flex-col items-center justify-start w-full h-full">
                 {/* Seção da imagem de capa */}
                 {renderCoverImage()}
 
                 {/* Seção do conteúdo principal */}
-                <div className="flex flex-row items-start justify-center w-full pt-2">
+                <div className="flex flex-row items-start justify-center h-full w-full pt-2 pb-1">
                     <div className="items-start justify-center h-full w-15">
                         {renderProjectTitle()}
                     </div>
-                    <div className="flex flex-col text-start font-roboto text-md space-y-4 w-full h-full">
-                        {renderMarkdownContent()}
+                    <div className="flex flex-col w-full h-full">
+                        <div className="flex flex-col text-start font-roboto text-md space-y-4 w-full h-full">
+                            {renderMarkdownContent()}
+                        </div>
+                        <div className="flex items-end justify-end w-full h-full pt-4">
+                            {renderToolIcon()}
+                        </div>
                     </div>
                 </div>
+                {/* texto de hover estilizado */}
+                {renderHoverText()}
             </div>
         </div>
     )
