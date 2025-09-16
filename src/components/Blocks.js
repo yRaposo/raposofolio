@@ -131,7 +131,7 @@ export default function Block({ pageId, onClick }) {
         //     </div>
         // )
         return (
-            <div className="markdown-container text-white text-wrap">
+            <div className="markdown-container text-white text-wrap text-justify mr-2">
                 {description}
             </div>
         )

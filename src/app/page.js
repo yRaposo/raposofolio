@@ -216,7 +216,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col items-center justify-center w-full">
             <ProjectList props={{ mini: true }} onProjectClick={handleProjectClick} />
-            
+
             {/* Botão Ver Todos os Projetos */}
             <div className="flex justify-end w-full mt-8 mr-4">
               <button
