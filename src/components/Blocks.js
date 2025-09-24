@@ -120,19 +120,33 @@ export default function Block({ pageId, onClick }) {
             )
         }
 
-        // Limita o texto a 200 caracteres
-        // const truncatedContent = blockData.parent.length > 200
-        //     ? `${blockData.parent.substring(0, 200)}...`
-        //     : blockData.parent
+        // Função para truncar baseado no tamanho da tela (usando CSS breakpoints)
+        const getTruncatedText = () => {
+            if (typeof window === 'undefined') return description
 
-        // return (
-        //     <div className="markdown-container text-white text-wrap truncate">
-        //         <ReactMarkdown>{truncatedContent}</ReactMarkdown>
-        //     </div>
-        // )
+            const width = window.innerWidth
+            let maxChars
+
+            if (width < 435) maxChars = 400
+            else if (width < 640) maxChars = 700  // xs
+            else if (width < 768) maxChars = 700  // sm
+            else if (width < 1422) maxChars = 180 // md
+            else if (width < 1280) maxChars = 350 // lg
+            else maxChars = 500                 // xl
+
+            return description.length > maxChars
+                ? description.substring(0, maxChars).trim() + "..."
+                : description
+        }
+
         return (
-            <div className="markdown-container text-white text-wrap text-justify mr-2">
-                {description}
+            <div className=" text-white leading-bre text-wrap mr-2 overflow-hidden
+            text-sm leading-tight h-full
+            sm:text-base sm:leading-normal
+            md:text-base md:leading-normal
+            lg:text-base lg:leading-relaxed
+            xl:text-base xl:leading-relaxed">
+                {getTruncatedText()}
             </div>
         )
     }
