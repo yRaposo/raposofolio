@@ -116,10 +116,10 @@ export default function ProjectModal({ projectData }) {
                             <div className="markdown-content">
                                 <ReactMarkdown 
                                     components={{
-                                        h1: ({children}) => <h1 className="text-2xl font-bebas text-[#447EF2] mb-4">{children}</h1>,
-                                        h2: ({children}) => <h2 className="text-xl font-bebas text-[#9D4DFF] mb-3">{children}</h2>,
-                                        h3: ({children}) => <h3 className="text-lg font-bebas text-[#F5F5F5] mb-2">{children}</h3>,
-                                        p: ({children}) => <p className="mb-3 text-[#F5F5F5]">{children}</p>,
+                                        h1: ({children}) => <h1 className="text-xl md:text-2xl font-bebas text-[#447EF2] mb-4">{children}</h1>,
+                                        h2: ({children}) => <h2 className="text-lg md:text-xl font-bebas text-[#9D4DFF] mb-3">{children}</h2>,
+                                        h3: ({children}) => <h3 className="text-md md:text-lg font-bebas text-[#F5F5F5] mb-2">{children}</h3>,
+                                        p: ({children}) => <p className="text-sm md:text-lg mb-3 text-[#F5F5F5]">{children}</p>,
                                         ul: ({children}) => <ul className="list-disc list-inside mb-3 text-[#F5F5F5] space-y-1">{children}</ul>,
                                         ol: ({children}) => <ol className="list-decimal list-inside mb-3 text-[#F5F5F5] space-y-1">{children}</ol>,
                                         code: ({children}) => <code className="bg-[#2A2A2A] text-[#77ff00] px-2 py-1 rounded text-sm">{children}</code>,

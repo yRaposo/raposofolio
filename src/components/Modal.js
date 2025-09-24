@@ -31,7 +31,7 @@ export default function Modal({ isOpen, onClose, children }) {
             />
 
             {/* Modal Content */}
-            <div className="relative bg-[#1A1A1A] border border-[#F5F5F5] h-[90vh] max-h-[90vh] w-full mx-10 my-4 flex flex-col">
+            <div className="relative bg-[#1A1A1A] border border-[#F5F5F5] h-[98vh] max-h-[98vh] md:h-[90vh] md:max-h-[90vh] w-full mx-3 md:mx-10 my-4 flex flex-col">
                 {/* Close Button */}
                 <button
                     onClick={onClose}
