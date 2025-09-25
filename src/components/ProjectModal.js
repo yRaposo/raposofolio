@@ -169,14 +169,14 @@ export default function ProjectModal({ projectData }) {
 
                                             return (
                                                 <div className="mb-6">
-                                                    <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                                                    <div className="relative w-full overflow-hidden rounded-lg" style={{ height: '320px', maxHeight: '320px' }}>
                                                         <iframe
                                                             src={src}
-                                                            width={width || '100%'}
-                                                            height={height || '315'}
+                                                            width="100%"
                                                             frameBorder="0"
                                                             allowFullScreen
-                                                            className="absolute top-0 left-0 w-full h-full"
+                                                            className="w-full"
+                                                            style={{ height: '320px', maxHeight: '320px' }}
                                                             {...props}
                                                         />
                                                     </div>
@@ -186,10 +186,8 @@ export default function ProjectModal({ projectData }) {
                                         div: ({ className, children, ...props }) => {
                                             if (className === 'video-embed') {
                                                 return (
-                                                    <div className="mb-6 overflow-hidden relative w-full" style={{ paddingBottom: '56.25%' }} {...props}>
-                                                        <div className="absolute top-0 left-0 w-full h-full">
-                                                            {children}
-                                                        </div>
+                                                    <div className="mb-6 overflow-hidden relative w-full rounded-lg" style={{ height: '320px', maxHeight: '320px' }} {...props}>
+                                                        {children}
                                                     </div>
                                                 );
                                             }
