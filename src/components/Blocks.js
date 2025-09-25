@@ -176,7 +176,7 @@ export default function Block({ pageId, onClick }) {
     const renderHoverText = () => {
         if (isHovered) {
             return (
-                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-[#77ff00] font-timegoing cursor-pointer select-none glitch-purple-initial w-100 z-50">
+                <div className="hidden md:flex md:absolute bottom-10 left-1/2 transform -translate-x-1/2 text-[#77ff00] font-timegoing cursor-pointer select-none glitch-purple-initial w-100 z-50">
                     <Image src="/imgs/verProjeto.svg"
                         alt="Ver Projeto"
                         width={900}
@@ -192,7 +192,7 @@ export default function Block({ pageId, onClick }) {
     // Renderização do componente principal
     return (
         <div
-            className="flex flex-col items-start justify-center bg-[#1A1A1A] border-1 border-[#F5F5F5] p-1  cursor-pointer w-full h-[600px] transform-flat hover:scale-105 hover:translate-z-3 transition duration-300 hover:shadow-xl hover:shadow-[#F5F5F5] bg-gradient-to-b from-[#1A1A1A] via-[#1A1A1A] via-80% hover:to-[#F5F5F5]"
+            className="flex flex-col items-start justify-center bg-[#1A1A1A] border-1 border-[#F5F5F5] p-1  cursor-pointer w-full h-[600px] transform-flat hover:scale-105 hover:translate-z-3 transition duration-300 hover:shadow-xl hover:shadow-[#F5F5F5] bg-gradient-to-b from-[#1A1A1A] via-[#1A1A1A] via-80% hover:to-[#F5F5F5] overflow-hidden relative"
             onClick={handleRepositoryClick}
             onMouseOver={() => setIsHovered(true)}
             onMouseOut={() => setIsHovered(false)}

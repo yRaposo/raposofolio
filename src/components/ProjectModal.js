@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
+import { FaGithub, FaExternalLinkAlt, FaBehanceSquare } from 'react-icons/fa'
 import ToolIcon from './toolIcon'
 import ReactMarkdown from "react-markdown"
 import rehypeRaw from 'rehype-raw'
@@ -14,7 +14,8 @@ export default function ProjectModal({ projectData }) {
         description: '',
         coverUrl: '',
         repositoryUrl: '',
-        liveUrl: '',
+        projectLink: '',
+        berranceLink: '',
         tools: [],
         blockContent: ''
     })
@@ -26,7 +27,8 @@ export default function ProjectModal({ projectData }) {
             const description = projectData?.properties?.Descrição?.rich_text?.[0]?.plain_text || '';
             const coverUrl = projectData?.cover?.file?.url || '';
             const repositoryUrl = projectData?.properties?.["Link do Repositório"]?.url || '';
-            const liveUrl = projectData?.properties?.["Link Live"]?.url || '';
+            const projectLink = projectData?.properties?.["URL do Projeto"]?.url || '';
+            const behanceLink = projectData?.properties?.["Behance do Projeto"]?.url || '';
             const tools = projectData?.properties?.["Ferramentas"]?.multi_select || [];
 
             setProjectInfo({
@@ -34,11 +36,12 @@ export default function ProjectModal({ projectData }) {
                 description,
                 coverUrl: coverUrl.trim(), // Remove espaços em branco
                 repositoryUrl: repositoryUrl.trim(),
-                liveUrl: liveUrl.trim(),
+                projectLink: projectLink.trim(),
+                behanceLink: behanceLink.trim(),
                 tools,
                 blockContent: ''
             })
-            
+
             // Buscar o conteúdo dos blocos do Notion
             if (projectData.id) {
                 fetchBlockContent(projectData.id)
@@ -52,7 +55,7 @@ export default function ProjectModal({ projectData }) {
             const markdownContent = await notionToMd(pageId)
             console.log('Conteúdo markdown recebido:', markdownContent) // Debug
             console.log('Tipo do conteúdo:', typeof markdownContent) // Debug tipo
-            
+
             // Garantir que é uma string
             let contentString = ''
             if (typeof markdownContent === 'string') {
@@ -61,7 +64,7 @@ export default function ProjectModal({ projectData }) {
                 // Se for um objeto, tentar extrair a string
                 contentString = markdownContent.parent || markdownContent.content || JSON.stringify(markdownContent) || ''
             }
-            
+
             setProjectInfo(prev => ({
                 ...prev,
                 blockContent: contentString
@@ -79,7 +82,7 @@ export default function ProjectModal({ projectData }) {
 
     if (!projectData) return null
 
-    const { title, description, coverUrl, repositoryUrl, liveUrl, tools, blockContent } = projectInfo
+    const { title, description, coverUrl, repositoryUrl, projectLink, behanceLink, tools, blockContent } = projectInfo
 
     return (
         <div className="flex flex-col space-y-6">
@@ -116,26 +119,26 @@ export default function ProjectModal({ projectData }) {
                             <div className="markdown-content">
                                 <ReactMarkdown
                                     components={{
-                                        h1: ({children}) => <h1 className="text-xl md:text-2xl font-bebas text-[#447EF2] mb-4">{children}</h1>,
-                                        h2: ({children}) => <h2 className="text-lg md:text-xl font-bebas text-[#9D4DFF] mb-3">{children}</h2>,
-                                        h3: ({children}) => <h3 className="text-md md:text-lg font-bebas text-[#F5F5F5] mb-2">{children}</h3>,
-                                        p: ({children}) => <p className="text-sm md:text-lg mb-3 text-[#F5F5F5]">{children}</p>,
-                                        ul: ({children}) => <ul className="list-disc list-inside mb-3 text-[#F5F5F5] space-y-1">{children}</ul>,
-                                        ol: ({children}) => <ol className="list-decimal list-inside mb-3 text-[#F5F5F5] space-y-1">{children}</ol>,
-                                        code: ({children}) => <code className="bg-[#2A2A2A] text-[#77ff00] px-2 py-1 rounded text-sm">{children}</code>,
-                                        pre: ({children}) => <pre className="bg-[#2A2A2A] p-4 rounded overflow-x-auto mb-3">{children}</pre>,
-                                        blockquote: ({children}) => <blockquote className="border-l-4 border-[#447EF2] pl-4 italic text-[#B0B0B0] mb-3">{children}</blockquote>,
-                                        strong: ({children}) => <strong className="text-[#447EF2] font-bold">{children}</strong>,
-                                        em: ({children}) => <em className="text-[#9D4DFF] italic">{children}</em>,
-                                        a: ({href, children}) => {
+                                        h1: ({ children }) => <h1 className="text-xl md:text-2xl font-bebas text-[#447EF2] mb-4">{children}</h1>,
+                                        h2: ({ children }) => <h2 className="text-lg md:text-xl font-bebas text-[#9D4DFF] mb-3">{children}</h2>,
+                                        h3: ({ children }) => <h3 className="text-md md:text-lg font-bebas text-[#F5F5F5] mb-2">{children}</h3>,
+                                        p: ({ children }) => <p className="text-sm md:text-lg mb-3 text-[#F5F5F5]">{children}</p>,
+                                        ul: ({ children }) => <ul className="list-disc list-inside mb-3 text-[#F5F5F5] space-y-1">{children}</ul>,
+                                        ol: ({ children }) => <ol className="list-decimal list-inside mb-3 text-[#F5F5F5] space-y-1">{children}</ol>,
+                                        code: ({ children }) => <code className="bg-[#2A2A2A] text-[#77ff00] px-2 py-1 rounded text-sm">{children}</code>,
+                                        pre: ({ children }) => <pre className="bg-[#2A2A2A] p-4 rounded overflow-x-auto mb-3">{children}</pre>,
+                                        blockquote: ({ children }) => <blockquote className="border-l-4 border-[#447EF2] pl-4 italic text-[#B0B0B0] mb-3">{children}</blockquote>,
+                                        strong: ({ children }) => <strong className="text-[#447EF2] font-bold">{children}</strong>,
+                                        em: ({ children }) => <em className="text-[#9D4DFF] italic">{children}</em>,
+                                        a: ({ href, children }) => {
                                             // Validar href antes de renderizar
                                             if (!href || href.trim() === '') {
                                                 return <span className="text-[#F5F5F5]">{children}</span>;
                                             }
                                             return (
-                                                <a 
-                                                    href={href} 
-                                                    target="_blank" 
+                                                <a
+                                                    href={href}
+                                                    target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="text-[#447EF2] hover:text-[#9D4DFF] underline transition-colors"
                                                 >
@@ -143,12 +146,12 @@ export default function ProjectModal({ projectData }) {
                                                 </a>
                                             );
                                         },
-                                        img: ({src, alt}) => {
+                                        img: ({ src, alt }) => {
                                             // Validar se src existe e não está vazio
                                             if (!src || src.trim() === '') {
                                                 return null; // Não renderiza nada se src for inválido
                                             }
-                                            
+
                                             return (
                                                 <div className="my-4">
                                                     <Image
@@ -162,7 +165,7 @@ export default function ProjectModal({ projectData }) {
                                             );
                                         },
                                         // Suporte para HTML customizado (vídeos, embeds)
-                                        div: ({className, children, ...props}) => {
+                                        div: ({ className, children, ...props }) => {
                                             if (className === 'video-embed') {
                                                 return (
                                                     <div className="my-6 rounded-lg overflow-hidden bg-black" {...props}>
@@ -212,20 +215,29 @@ export default function ProjectModal({ projectData }) {
                         {repositoryUrl && (
                             <button
                                 onClick={() => window.open(repositoryUrl, '_blank')}
-                                className="flex items-center space-x-2 bg-[#447EF2] hover:bg-[#3366CC] text-white px-4 py-2 transition-colors glitch-blue"
+                                className="flex items-center space-x-2 bg-[#447EF2] hover:bg-[#3366CC] text-white px-4 py-2 transition-colors glitch-purple"
                             >
                                 <FaGithub size={20} />
                                 <span>Repositório</span>
                             </button>
                         )}
 
-                        {liveUrl && (
+                        {projectLink && (
                             <button
-                                onClick={() => window.open(liveUrl, '_blank')}
-                                className="flex items-center space-x-2 bg-[#9D4DFF] hover:bg-[#7a32cc] text-white px-4 py-2 transition-colors glitch-purple"
+                                onClick={() => window.open(projectLink, '_blank')}
+                                className="flex items-center space-x-2 bg-[#447EF2] hover:bg-[#3366CC] text-white px-4 py-2 transition-colors glitch-purple"
                             >
                                 <FaExternalLinkAlt size={16} />
                                 <span>Ver Projeto</span>
+                            </button>
+                        )}
+                        {behanceLink && (
+                            <button
+                                onClick={() => window.open(projectLink, '_blank')}
+                                className="flex items-center space-x-2 bg-[#447EF2] hover:bg-[#3366CC] text-white px-4 py-2 transition-colors glitch-purple"
+                            >
+                                <FaBehanceSquare size={16} />
+                                <span>Ver Behance</span>
                             </button>
                         )}
                     </div>
