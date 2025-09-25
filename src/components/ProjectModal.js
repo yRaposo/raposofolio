@@ -114,7 +114,7 @@ export default function ProjectModal({ projectData }) {
                             </div>
                         ) : blockContent && typeof blockContent === 'string' && blockContent.trim() ? (
                             <div className="markdown-content">
-                                <ReactMarkdown 
+                                <ReactMarkdown
                                     components={{
                                         h1: ({children}) => <h1 className="text-xl md:text-2xl font-bebas text-[#447EF2] mb-4">{children}</h1>,
                                         h2: ({children}) => <h2 className="text-lg md:text-xl font-bebas text-[#9D4DFF] mb-3">{children}</h2>,

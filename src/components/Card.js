@@ -19,11 +19,11 @@ export default function Card({ props }) {
             </div>
             <div className="flex-1 min-w-0">
                 <h1 className="text-center md:text-left text-lg md:text-2xl text-white font-bold">{props.title}</h1>
-                <p className="text-white text-center md:text-left text-sm md:text-base mt-2 
+                <p className="text-white text-center md:text-left text-sm md:text-base mt-2
                     overflow-hidden break-words hyphens-auto
-                    line-clamp-2 
-                    sm:line-clamp-3 
-                    md:line-clamp-4 
+                    line-clamp-2
+                    sm:line-clamp-3
+                    md:line-clamp-4
                     lg:line-clamp-3
                     max-h-[2.5rem]
                     sm:max-h-[3.75rem]
