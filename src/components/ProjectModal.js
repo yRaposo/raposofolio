@@ -211,14 +211,14 @@ export default function ProjectModal({ projectData }) {
                     )}
 
                     {/* Links */}
-                    <div className="flex space-x-4 pt-4">
+                    <div className="flex flex-col md:flex-row space-y-2 md:space-x-4 md:space-y-0 pt-4">
                         {repositoryUrl && (
                             <button
                                 onClick={() => window.open(repositoryUrl, '_blank')}
                                 className="flex items-center space-x-2 bg-[#447EF2] hover:bg-[#3366CC] text-white px-4 py-2 transition-colors glitch-purple"
                             >
                                 <FaGithub size={20} />
-                                <span>Repositório</span>
+                                <span>Ver Repositório</span>
                             </button>
                         )}
 
@@ -228,7 +228,7 @@ export default function ProjectModal({ projectData }) {
                                 className="flex items-center space-x-2 bg-[#447EF2] hover:bg-[#3366CC] text-white px-4 py-2 transition-colors glitch-purple"
                             >
                                 <FaExternalLinkAlt size={16} />
-                                <span>Ver Projeto</span>
+                                <span>Ver Projeto</span> 
                             </button>
                         )}
                         {behanceLink && (
