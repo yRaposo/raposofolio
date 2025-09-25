@@ -131,7 +131,6 @@ export default function ProjectModal({ projectData }) {
                                         strong: ({ children }) => <strong className="text-[#447EF2] font-bold">{children}</strong>,
                                         em: ({ children }) => <em className="text-[#9D4DFF] italic">{children}</em>,
                                         a: ({ href, children }) => {
-                                            // Validar href antes de renderizar
                                             if (!href || href.trim() === '') {
                                                 return <span className="text-[#F5F5F5]">{children}</span>;
                                             }
@@ -147,13 +146,12 @@ export default function ProjectModal({ projectData }) {
                                             );
                                         },
                                         img: ({ src, alt }) => {
-                                            // Validar se src existe e não está vazio
                                             if (!src || src.trim() === '') {
-                                                return null; // Não renderiza nada se src for inválido
+                                                return null;
                                             }
 
                                             return (
-                                                <div className="my-4">
+                                                <div className="mb-4">
                                                     <Image
                                                         src={src}
                                                         alt={alt || 'Imagem do projeto'}
@@ -164,12 +162,34 @@ export default function ProjectModal({ projectData }) {
                                                 </div>
                                             );
                                         },
-                                        // Suporte para HTML customizado (vídeos, embeds)
+                                        iframe: ({ src, width, height, ...props }) => {
+                                            if (!src || src.trim() === '') {
+                                                return null;
+                                            }
+
+                                            return (
+                                                <div className="mb-6">
+                                                    <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                                                        <iframe
+                                                            src={src}
+                                                            width={width || '100%'}
+                                                            height={height || '315'}
+                                                            frameBorder="0"
+                                                            allowFullScreen
+                                                            className="absolute top-0 left-0 w-full h-full"
+                                                            {...props}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            );
+                                        },
                                         div: ({ className, children, ...props }) => {
                                             if (className === 'video-embed') {
                                                 return (
-                                                    <div className="my-6 rounded-lg overflow-hidden bg-black" {...props}>
-                                                        {children}
+                                                    <div className="mb-6 overflow-hidden relative w-full" style={{ paddingBottom: '56.25%' }} {...props}>
+                                                        <div className="absolute top-0 left-0 w-full h-full">
+                                                            {children}
+                                                        </div>
                                                     </div>
                                                 );
                                             }
@@ -183,8 +203,7 @@ export default function ProjectModal({ projectData }) {
                                             return <div className={className} {...props}>{children}</div>;
                                         }
                                     }}
-                                    // Permitir HTML para embeds de vídeo
-                                    rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                                    rehypePlugins={[rehypeRaw]}
                                     remarkPlugins={[]}
                                 >
                                     {blockContent}
@@ -228,7 +247,7 @@ export default function ProjectModal({ projectData }) {
                                 className="flex items-center space-x-2 bg-[#447EF2] hover:bg-[#3366CC] text-white px-4 py-2 transition-colors glitch-purple"
                             >
                                 <FaExternalLinkAlt size={16} />
-                                <span>Ver Projeto</span> 
+                                <span>Ver Projeto</span>
                             </button>
                         )}
                         {behanceLink && (
