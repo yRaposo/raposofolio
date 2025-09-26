@@ -156,7 +156,7 @@ export default function Block({ pageId, onClick }) {
         if (toolName) {
             const visibleTools = toolName.slice(0, 4)
             const remainingCount = toolName.length - 4
-            
+
             return (
                 <div className="space-x-1 flex flex-row">
                     {remainingCount > 0 && (
