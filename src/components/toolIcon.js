@@ -1,7 +1,7 @@
 import { BiLogoVisualStudio } from "react-icons/bi";
 import { FaCog, FaJava } from "react-icons/fa";
 import { IoIosWifi } from "react-icons/io";
-import { SiAdobeaftereffects, SiAdobeillustrator, SiAdobephotoshop, SiAdobepremierepro, SiCplusplus, SiCss3, SiFigma, SiHtml5, SiJavascript, SiKotlin, SiNextdotjs, SiNodedotjs, SiReact, SiSpring, SiVite } from "react-icons/si";
+import { SiAdobeaftereffects, SiAdobeillustrator, SiAdobephotoshop, SiAdobepremierepro, SiCanva, SiCplusplus, SiCss3, SiFigma, SiGimp, SiHtml5, SiJavascript, SiKotlin, SiNextdotjs, SiNodedotjs, SiReact, SiSpring, SiVite } from "react-icons/si";
 
 export default function ToolIcon({ toolName, iconUrl }) {
     if (!toolName) return null;
@@ -13,9 +13,13 @@ export default function ToolIcon({ toolName, iconUrl }) {
             case "c++":
                 return <SiCplusplus size={24} color="#447EF2" />;
             case "css":
+                return <SiCanva size={24} color="#447EF2" />;
+            case "canva":
                 return <SiCss3 size={24} color="#447EF2" />;
             case "figma":
                 return <SiFigma size={24} color="#447EF2" />;
+            case "gimp":
+                return <SiGimp size={24} color="#447EF2" />;
             case "html":
                 return <SiHtml5 size={24} color="#447EF2" />;
             case "illustrator":
