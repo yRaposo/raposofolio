@@ -154,9 +154,17 @@ export default function Block({ pageId, onClick }) {
     const renderToolIcon = () => {
         const toolName = pageData?.properties?.["Ferramentas"]?.multi_select
         if (toolName) {
+            const visibleTools = toolName.slice(0, 4)
+            const remainingCount = toolName.length - 4
+            
             return (
                 <div className="space-x-1 flex flex-row">
-                    {toolName.map((tool, index) => (
+                    {remainingCount > 0 && (
+                        <div className="flex items-center justify-center h-7 w-7 text-lg font-light text-[#447EF2]">
+                            +{remainingCount}
+                        </div>
+                    )}
+                    {visibleTools.map((tool, index) => (
                         <ToolIcon key={index} toolName={tool.name} />
                     ))}
                 </div>
