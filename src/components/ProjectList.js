@@ -23,7 +23,7 @@ export default function ProjectList({ props, onProjectClick }) {
             return (
                 <div className="flex flex-col items-center justify-center w-full h-full px-2">
                     <div className="grid md:grid-cols-3 w-full h-full gap-4">
-                        {blocks?.results?.slice(0, 3).map((block) => (
+                        {blocks?.results?.slice(0, 6).map((block) => (
                             <Block key={block.id} pageId={block.id} onClick={onProjectClick} />
                         ))}
                     </div>

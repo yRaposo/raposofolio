@@ -210,7 +210,7 @@ export default function Block({ pageId, onClick }) {
                 {renderCoverImage()}
 
                 {/* Seção do conteúdo principal */}
-                <div className="flex flex-row items-start justify-center h-full w-full pt-2 pb-1">
+                <div className="flex flex-row items-start justify-center h-full w-full pt-2 overflow-hidden">
                     <div className="items-start justify-center h-full w-15">
                         {renderProjectTitle()}
                     </div>
