@@ -119,12 +119,84 @@ export default function ProjectModal({ projectData }) {
                             <div className="markdown-content">
                                 <ReactMarkdown
                                     components={{
+                                        div: ({ children }) => <div className="mb-4 flex flex-row">{children}</div>,
                                         h1: ({ children }) => <h1 className="text-xl md:text-2xl font-bebas text-[#447EF2] mb-4">{children}</h1>,
                                         h2: ({ children }) => <h2 className="text-lg md:text-xl font-bebas text-[#9D4DFF] mb-3">{children}</h2>,
                                         h3: ({ children }) => <h3 className="text-md md:text-lg font-bebas text-[#F5F5F5] mb-2">{children}</h3>,
-                                        p: ({ children }) => <p className="text-sm md:text-lg mb-3 text-[#F5F5F5]">{children}</p>,
-                                        ul: ({ children }) => <ul className="text-sm md:text-lg list-disc list-inside mb-3 text-[#F5F5F5] space-y-1">{children}</ul>,
-                                        ol: ({ children }) => <ol className="text-sm md:text-lg list-decimal list-inside mb-3 text-[#F5F5F5] space-y-1">{children}</ol>,
+                                        p: ({ children, node }) => {
+                                            // Verifica se o parágrafo contém apenas uma imagem
+                                            if (node && node.children && node.children.length === 1 && node.children[0].tagName === 'img') {
+                                                return <>{children}</>;
+                                            }
+
+                                            // Verifica se contém elementos de bloco (div, iframe, etc.)
+                                            const hasBlockElements = node && node.children && node.children.some(child =>
+                                                child.tagName && ['div', 'iframe', 'video', 'embed'].includes(child.tagName)
+                                            );
+
+                                            // Se contém elementos de bloco, renderiza sem wrapper p
+                                            if (hasBlockElements) {
+                                                return <div className="mb-3">{children}</div>;
+                                            }
+
+                                            // Para texto normal, usa o parágrafo
+                                            return <p className="text-sm md:text-lg mb-3 text-[#F5F5F5]">{children}</p>;
+                                        },
+                                        ul: ({ children, node }) => {
+                                            // Verifica se a lista contém elementos de bloco (imagens, vídeos, etc.)
+                                            const hasBlockElements = node && node.children && node.children.some(child => 
+                                                child.children && child.children.some(grandChild => 
+                                                    grandChild.tagName && ['img', 'div', 'iframe', 'video'].includes(grandChild.tagName)
+                                                )
+                                            );
+                                            
+                                            return (
+                                                <ul className={`list-disc mb-3 text-[#F5F5F5] ${
+                                                    hasBlockElements 
+                                                        ? 'list-none space-y-4 ml-0' 
+                                                        : 'list-inside space-y-1 text-sm md:text-lg ml-4'
+                                                }`}>
+                                                    {children}
+                                                </ul>
+                                            );
+                                        },
+                                        ol: ({ children, node }) => {
+                                            // Verifica se a lista contém elementos de bloco
+                                            const hasBlockElements = node && node.children && node.children.some(child => 
+                                                child.children && child.children.some(grandChild => 
+                                                    grandChild.tagName && ['img', 'div', 'iframe', 'video'].includes(grandChild.tagName)
+                                                )
+                                            );
+                                            
+                                            return (
+                                                <ol className={`list-decimal mb-3 text-[#F5F5F5] ${
+                                                    hasBlockElements 
+                                                        ? 'list-none space-y-4 ml-0' 
+                                                        : 'list-inside space-y-1 text-sm md:text-lg ml-4'
+                                                }`}>
+                                                    {children}
+                                                </ol>
+                                            );
+                                        },
+                                        li: ({ children, node }) => {
+                                            // Verifica se o item da lista contém elementos de bloco
+                                            const hasBlockElements = node && node.children && node.children.some(child => 
+                                                child.tagName && ['img', 'div', 'iframe', 'video', 'ul', 'ol'].includes(child.tagName)
+                                            );
+                                            
+                                            if (hasBlockElements) {
+                                                return (
+                                                    <li className="mb-4 border-l-2 border-[#447EF2] pl-4">
+                                                        <div className="flex flex-col space-y-2">
+                                                            {children}
+                                                        </div>
+                                                    </li>
+                                                );
+                                            }
+                                            
+                                            // Para itens de lista simples
+                                            return <li className="text-sm md:text-lg">{children}</li>;
+                                        },
                                         code: ({ children }) => <code className="bg-[#2A2A2A] text-[#77ff00] px-2 py-1 rounded text-sm">{children}</code>,
                                         pre: ({ children }) => <pre className="bg-[#2A2A2A] p-4 rounded overflow-x-auto mb-3">{children}</pre>,
                                         blockquote: ({ children }) => <blockquote className="border-l-4 border-[#447EF2] pl-4 italic text-[#B0B0B0] mb-3">{children}</blockquote>,
@@ -151,15 +223,13 @@ export default function ProjectModal({ projectData }) {
                                             }
 
                                             return (
-                                                <div className="mb-4">
-                                                    <Image
-                                                        src={src}
-                                                        alt={alt || 'Imagem do projeto'}
-                                                        width={800}
-                                                        height={400}
-                                                        className="rounded-lg object-cover w-full h-auto"
-                                                    />
-                                                </div>
+                                                <Image
+                                                    src={src}
+                                                    alt={alt || 'Imagem do projeto'}
+                                                    width={800}
+                                                    height={400}
+                                                    className="object-cover w-full h-auto mb-4"
+                                                />
                                             );
                                         },
                                         iframe: ({ src, width, height, ...props }) => {
@@ -169,7 +239,7 @@ export default function ProjectModal({ projectData }) {
 
                                             return (
                                                 <div className="mb-6">
-                                                    <div className="relative w-full overflow-hidden rounded-lg" style={{ height: '320px', maxHeight: '320px' }}>
+                                                    <div className="relative w-full overflow-hidden" style={{ height: '320px', maxHeight: '320px' }}>
                                                         <iframe
                                                             src={src}
                                                             width="100%"
@@ -186,7 +256,7 @@ export default function ProjectModal({ projectData }) {
                                         div: ({ className, children, ...props }) => {
                                             if (className === 'video-embed') {
                                                 return (
-                                                    <div className="mb-6 overflow-hidden relative w-full rounded-lg" style={{ height: '320px', maxHeight: '320px' }} {...props}>
+                                                    <div className="mb-6 overflow-hidden relative w-full" style={{ height: '320px', maxHeight: '320px' }} {...props}>
                                                         {children}
                                                     </div>
                                                 );

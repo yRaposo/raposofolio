@@ -13,9 +13,9 @@ export default function ToolIcon({ toolName, iconUrl }) {
             case "c++":
                 return <SiCplusplus size={24} color="#447EF2" />;
             case "css":
-                return <SiCanva size={24} color="#447EF2" />;
-            case "canva":
                 return <SiCss3 size={24} color="#447EF2" />;
+            case "canva":
+                return <SiCanva size={24} color="#447EF2" />;
             case "figma":
                 return <SiFigma size={24} color="#447EF2" />;
             case "gimp":
