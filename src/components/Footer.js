@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function Footer() {
+    const router = useRouter();
+
     return (
         <footer className="w-full flex flex-row bg-[#1A1A1A] text-[#F5F5F5] py-10 text-center border-t border-[#f5f5f5]">
             <div className="w-full mx-10 md:mx-[64px] flex flex-col md:flex-row justify-around md:justify-between items-center">
@@ -17,6 +20,9 @@ export default function Footer() {
                             className="w-35"
                         />
                         <div className={`flex flex-col text-left transition-colors font-roboto uppercase font-medium duration-500 text-[#9D4DFF] mt-4`}>
+                            <div onClick={() => router.push('/')} className="hover:text-[#f5f5f5] cursor-pointer glitch-purple">
+                                Voltar ao topo
+                            </div>
                             <div onClick={() => router.push('/#sobre')} className="hover:text-[#f5f5f5] cursor-pointer glitch-purple">
                                 Sobre Mim
                             </div>
@@ -38,11 +44,11 @@ export default function Footer() {
                         © 2025 yRaposo — Todos os direitos reservados
                     </div>
                     <div className="flex mt-4 md:mt-0 md:justify-end w-full">
-                        <button
+                        {/* <button
                             className="flex items-center justify-center text-white font-bebas text-xl px-8 py-3 transition-all duration-300 hover:scale-105 glitch-blue border border-[#F5F5F5] hover:bg-[#F5F5F5] hover:text-black"
                         >
                             Meu Curriculo
-                        </button>
+                        </button> */}
                     </div>
                     <div className="w-full mt-4 md:justify-end flex flex-col h-full">
                         <h3 className="text-2xl uppercase text-[#447ef2] text-left md:text-right">Redes Sociais</h3>

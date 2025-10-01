@@ -94,8 +94,9 @@ export default function ProjectModal({ projectData }) {
                         <Image
                             src={coverUrl}
                             alt={title || 'Capa do projeto'}
-                            fill
-                            className="object-cover"
+                            width={1000}
+                            height={1000}
+                            className="object-cover w-full h-full"
                         />
                     </div>
                 )}
@@ -144,46 +145,44 @@ export default function ProjectModal({ projectData }) {
                                         },
                                         ul: ({ children, node }) => {
                                             // Verifica se a lista contém elementos de bloco (imagens, vídeos, etc.)
-                                            const hasBlockElements = node && node.children && node.children.some(child => 
-                                                child.children && child.children.some(grandChild => 
+                                            const hasBlockElements = node && node.children && node.children.some(child =>
+                                                child.children && child.children.some(grandChild =>
                                                     grandChild.tagName && ['img', 'div', 'iframe', 'video'].includes(grandChild.tagName)
                                                 )
                                             );
-                                            
+
                                             return (
-                                                <ul className={`list-disc mb-3 text-[#F5F5F5] ${
-                                                    hasBlockElements 
-                                                        ? 'list-none space-y-4 ml-0' 
+                                                <ul className={`list-disc mb-3 text-[#F5F5F5] ${hasBlockElements
+                                                        ? 'list-none space-y-4 ml-0'
                                                         : 'list-inside space-y-1 text-sm md:text-lg ml-4'
-                                                }`}>
+                                                    }`}>
                                                     {children}
                                                 </ul>
                                             );
                                         },
                                         ol: ({ children, node }) => {
                                             // Verifica se a lista contém elementos de bloco
-                                            const hasBlockElements = node && node.children && node.children.some(child => 
-                                                child.children && child.children.some(grandChild => 
+                                            const hasBlockElements = node && node.children && node.children.some(child =>
+                                                child.children && child.children.some(grandChild =>
                                                     grandChild.tagName && ['img', 'div', 'iframe', 'video'].includes(grandChild.tagName)
                                                 )
                                             );
-                                            
+
                                             return (
-                                                <ol className={`list-decimal mb-3 text-[#F5F5F5] ${
-                                                    hasBlockElements 
-                                                        ? 'list-none space-y-4 ml-0' 
+                                                <ol className={`list-decimal mb-3 text-[#F5F5F5] ${hasBlockElements
+                                                        ? 'list-none space-y-4 ml-0'
                                                         : 'list-inside space-y-1 text-sm md:text-lg ml-4'
-                                                }`}>
+                                                    }`}>
                                                     {children}
                                                 </ol>
                                             );
                                         },
                                         li: ({ children, node }) => {
                                             // Verifica se o item da lista contém elementos de bloco
-                                            const hasBlockElements = node && node.children && node.children.some(child => 
+                                            const hasBlockElements = node && node.children && node.children.some(child =>
                                                 child.tagName && ['img', 'div', 'iframe', 'video', 'ul', 'ol'].includes(child.tagName)
                                             );
-                                            
+
                                             if (hasBlockElements) {
                                                 return (
                                                     <li className="mb-4 border-l-2 border-[#447EF2] pl-4">
@@ -193,7 +192,7 @@ export default function ProjectModal({ projectData }) {
                                                     </li>
                                                 );
                                             }
-                                            
+
                                             // Para itens de lista simples
                                             return <li className="text-sm md:text-lg">{children}</li>;
                                         },
@@ -226,8 +225,8 @@ export default function ProjectModal({ projectData }) {
                                                 <Image
                                                     src={src}
                                                     alt={alt || 'Imagem do projeto'}
-                                                    width={800}
-                                                    height={400}
+                                                    width={5000}
+                                                    height={5000}
                                                     className="object-cover w-full h-auto mb-4"
                                                 />
                                             );
@@ -320,7 +319,7 @@ export default function ProjectModal({ projectData }) {
                         )}
                         {behanceLink && (
                             <button
-                                onClick={() => window.open(projectLink, '_blank')}
+                                onClick={() => window.open(behanceLink, '_blank')}
                                 className="flex items-center space-x-2 bg-[#447EF2] hover:bg-[#3366CC] text-white px-4 py-2 transition-colors glitch-purple"
                             >
                                 <FaBehanceSquare size={16} />

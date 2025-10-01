@@ -83,8 +83,8 @@ export default function Block({ pageId, onClick }) {
                 <Image
                     src={coverUrl || iconEmoji || "/imgs/fallbackIMG.png"}
                     alt="Capa do projeto"
-                    width={500}
-                    height={300}
+                    width={1000}
+                    height={1000}
                     className="w-full h-48 object-cover"
                 />
             )
